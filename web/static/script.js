@@ -1,6 +1,6 @@
 /* =========================================================
    AURA AI SMART CALENDAR
-   COMPLETE FRONTEND JAVASCRIPT
+   COMPLETE MOBILE + DESKTOP FRONTEND
 ========================================================= */
 
 "use strict";
@@ -11,9 +11,14 @@
 
 let events = [];
 let currentCalendarDate = new Date();
+
 let selectedLanguage = "en-IN";
+
 let recognition = null;
 let isListening = false;
+let recognitionSupported = false;
+
+let toastTimer = null;
 
 
 /* =========================================================
@@ -21,6 +26,7 @@ let isListening = false;
 ========================================================= */
 
 const festivals = [
+
     {date:"2026-01-01", name:"New Year's Day", category:"National"},
     {date:"2026-01-12", name:"National Youth Day", category:"National"},
     {date:"2026-01-13", name:"Lohri", category:"Festival"},
@@ -76,6 +82,7 @@ const festivals = [
 
     {date:"2026-12-10", name:"Human Rights Day", category:"National"},
     {date:"2026-12-25", name:"Christmas", category:"Festival"}
+
 ];
 
 
@@ -128,7 +135,7 @@ async function initializeAURA() {
 
     setGreeting();
 
-    console.log("✅ AURA is ready");
+    console.log("✨ AURA initialized successfully");
 
 }
 
@@ -139,9 +146,7 @@ async function initializeAURA() {
 
 function setupNavigation() {
 
-    const navItems = document.querySelectorAll(".nav-item");
-
-    navItems.forEach(button => {
+    document.querySelectorAll(".nav-item").forEach(button => {
 
         button.addEventListener("click", () => {
 
@@ -149,15 +154,13 @@ function setupNavigation() {
 
             if (!sectionName) return;
 
-            navItems.forEach(item => {
-                item.classList.remove("active");
-            });
+            document.querySelectorAll(".nav-item")
+                .forEach(item => item.classList.remove("active"));
 
             button.classList.add("active");
 
-            document.querySelectorAll(".section").forEach(section => {
-                section.classList.remove("active");
-            });
+            document.querySelectorAll(".section")
+                .forEach(section => section.classList.remove("active"));
 
             const target = document.getElementById(sectionName);
 
@@ -190,7 +193,7 @@ function setupNavigation() {
 
 
 /* =========================================================
-   BUTTON SETUP
+   BUTTONS
 ========================================================= */
 
 function setupButtons() {
@@ -229,22 +232,47 @@ function setupButtons() {
         scheduleAddBtn.addEventListener("click", openEventModal);
     }
 
+
     if (openAssistantBtn) {
+
         openAssistantBtn.addEventListener("click", () => {
+
             activateSection("assistant");
+
             setTimeout(() => {
                 startVoiceInput();
-            }, 400);
+            }, 300);
+
         });
+
     }
+
+
+    /* HERO AURA ORB */
 
     if (auraOrb) {
-        auraOrb.addEventListener("click", startVoiceInput);
+
+        auraOrb.addEventListener("click", () => {
+
+            startVoiceInput();
+
+        });
+
     }
 
+
+    /* BIG AURA ORB */
+
     if (bigAuraOrb) {
-        bigAuraOrb.addEventListener("click", startVoiceInput);
+
+        bigAuraOrb.addEventListener("click", () => {
+
+            startVoiceInput();
+
+        });
+
     }
+
 
     if (viewScheduleBtn) {
 
@@ -354,15 +382,21 @@ function openEventModal() {
 
     modal.classList.add("show");
 
+
     const dateInput =
         document.getElementById("eventDate");
 
     const timeInput =
         document.getElementById("eventTime");
 
+
     if (dateInput && !dateInput.value) {
-        dateInput.value = formatDateInput(new Date());
+
+        dateInput.value =
+            formatDateInput(new Date());
+
     }
+
 
     if (timeInput && !timeInput.value) {
 
@@ -402,6 +436,7 @@ async function saveEvent(e) {
 
     e.preventDefault();
 
+
     const title =
         document.getElementById("eventTitle").value.trim();
 
@@ -427,7 +462,7 @@ async function saveEvent(e) {
     if (!title || !date || !time) {
 
         showToast(
-            "Error",
+            "Missing Details",
             "Please enter title, date and time.",
             "⚠️"
         );
@@ -438,36 +473,31 @@ async function saveEvent(e) {
 
     const eventData = {
 
-        title: title,
-
-        date: date,
-
-        time: time,
-
-        reminder: reminder,
-
-        category: category,
-
-        priority: priority,
-
-        description: description
+        title,
+        date,
+        time,
+        reminder,
+        category,
+        priority,
+        description
 
     };
 
 
     try {
 
-        const response = await fetch("/api/events", {
+        const response =
+            await fetch("/api/events", {
 
-            method: "POST",
+                method: "POST",
 
-            headers: {
-                "Content-Type": "application/json"
-            },
+                headers: {
+                    "Content-Type": "application/json"
+                },
 
-            body: JSON.stringify(eventData)
+                body: JSON.stringify(eventData)
 
-        });
+            });
 
 
         const result =
@@ -484,13 +514,6 @@ async function saveEvent(e) {
         }
 
 
-        showToast(
-            "Event Created",
-            `${title} scheduled successfully.`,
-            "✅"
-        );
-
-
         closeEventModal();
 
         document.getElementById("eventForm").reset();
@@ -502,6 +525,15 @@ async function saveEvent(e) {
         renderCalendar();
 
         renderAllEvents();
+
+
+        /* ONLY ONE SUCCESS TOAST */
+
+        showToast(
+            "Event Created",
+            `${title} scheduled successfully.`,
+            "✅"
+        );
 
 
         speak(
@@ -527,7 +559,7 @@ async function saveEvent(e) {
 
 
 /* =========================================================
-   LOAD EVENTS FROM FLASK
+   LOAD EVENTS
 ========================================================= */
 
 async function loadEvents() {
@@ -543,11 +575,6 @@ async function loadEvents() {
 
         events =
             await response.json();
-
-        console.log(
-            "📅 Events loaded:",
-            events
-        );
 
     }
 
@@ -592,15 +619,17 @@ async function deleteEvent(id) {
 
 
         if (!response.ok || !result.success) {
+
             throw new Error(
                 result.message ||
                 "Unable to delete event."
             );
+
         }
 
 
         showToast(
-            "Deleted",
+            "Event Deleted",
             "Event removed successfully.",
             "🗑️"
         );
@@ -621,7 +650,7 @@ async function deleteEvent(id) {
         console.error(error);
 
         showToast(
-            "Error",
+            "Delete Error",
             error.message,
             "❌"
         );
@@ -642,15 +671,16 @@ function updateDashboard() {
 
 
     const todayEvents =
-        events.filter(event =>
-            event.date === today
+        events.filter(
+            event => event.date === today
         );
 
 
     const upcoming =
-        events.filter(event =>
-            event.date >= today &&
-            event.date !== today
+        events.filter(
+            event =>
+                event.date >= today &&
+                event.date !== today
         );
 
 
@@ -668,8 +698,8 @@ function updateDashboard() {
 
     setText(
         "reminderCount",
-        events.filter(event =>
-            Number(event.reminder) > 0
+        events.filter(
+            event => Number(event.reminder) > 0
         ).length
     );
 
@@ -701,10 +731,8 @@ function renderTodaySchedule() {
 
     const todayEvents =
         events
-            .filter(event =>
-                event.date === today
-            )
-            .sort((a,b) =>
+            .filter(event => event.date === today)
+            .sort((a, b) =>
                 a.time.localeCompare(b.time)
             );
 
@@ -733,9 +761,7 @@ function renderTodaySchedule() {
 
 
     container.innerHTML =
-        todayEvents
-            .map(eventCard)
-            .join("");
+        todayEvents.map(eventCard).join("");
 
 }
 
@@ -753,7 +779,7 @@ function renderAllEvents() {
 
 
     const sorted =
-        [...events].sort((a,b) => {
+        [...events].sort((a, b) => {
 
             const first =
                 `${a.date} ${a.time}`;
@@ -797,10 +823,6 @@ function renderAllEvents() {
 
 function eventCard(event) {
 
-    const date =
-        formatPrettyDate(event.date);
-
-
     return `
 
         <div class="event-card">
@@ -816,7 +838,7 @@ function eventCard(event) {
                 </strong>
 
                 <small>
-                    ${date}
+                    ${formatPrettyDate(event.date)}
                     •
                     ${escapeHTML(event.category || "Personal")}
                     •
@@ -848,19 +870,13 @@ function eventCard(event) {
 function calculateFreeTime(date) {
 
     const dayEvents =
-        events.filter(event =>
-            event.date === date
+        events.filter(
+            event => event.date === date
         );
 
 
-    let occupied = 0;
-
-    dayEvents.forEach(() => {
-
-        /* default 1 hour per event */
-        occupied += 60;
-
-    });
+    const occupied =
+        dayEvents.length * 60;
 
 
     const availableMinutes =
@@ -952,7 +968,7 @@ function renderCalendar() {
         currentCalendarDate.getMonth();
 
 
-    const monthName =
+    heading.textContent =
         currentCalendarDate.toLocaleString(
             "en-IN",
             {
@@ -962,24 +978,11 @@ function renderCalendar() {
         );
 
 
-    heading.textContent =
-        monthName;
-
-
     const firstDay =
-        new Date(
-            year,
-            month,
-            1
-        ).getDay();
-
+        new Date(year, month, 1).getDay();
 
     const days =
-        new Date(
-            year,
-            month + 1,
-            0
-        ).getDate();
+        new Date(year, month + 1, 0).getDate();
 
 
     container.innerHTML = "";
@@ -1005,15 +1008,16 @@ function renderCalendar() {
 
 
         const date =
-            `${year}-${String(month + 1).padStart(2,"0")}-${String(day).padStart(2,"0")}`;
+            `${year}-${String(month + 1).padStart(2, "0")}-${String(day).padStart(2, "0")}`;
 
 
-        const today =
-            formatDateInput(new Date());
+        if (
+            date ===
+            formatDateInput(new Date())
+        ) {
 
-
-        if (date === today) {
             cell.classList.add("today");
+
         }
 
 
@@ -1047,9 +1051,12 @@ function renderCalendar() {
             "click",
             () => {
 
-                document.getElementById(
-                    "eventDate"
-                ).value = date;
+                const input =
+                    document.getElementById("eventDate");
+
+                if (input) {
+                    input.value = date;
+                }
 
                 openEventModal();
 
@@ -1080,8 +1087,9 @@ function setupFestivalFilters() {
 
                     document
                         .querySelectorAll(".filter-btn")
-                        .forEach(btn =>
-                            btn.classList.remove("active")
+                        .forEach(
+                            btn =>
+                                btn.classList.remove("active")
                         );
 
 
@@ -1155,10 +1163,7 @@ function startClock() {
 
     updateClock();
 
-    setInterval(
-        updateClock,
-        1000
-    );
+    setInterval(updateClock, 1000);
 
 }
 
@@ -1193,16 +1198,9 @@ function updateClock() {
         );
 
 
-    setText(
-        "liveTime",
-        time
-    );
+    setText("liveTime", time);
 
-
-    setText(
-        "liveDate",
-        date
-    );
+    setText("liveDate", date);
 
 }
 
@@ -1210,23 +1208,16 @@ function updateClock() {
 function setTodayHeading() {
 
     const heading =
-        document.getElementById(
-            "todayHeading"
-        );
+        document.getElementById("todayHeading");
 
     if (!heading) return;
 
 
-    const now =
-        new Date();
-
-
     const hour =
-        now.getHours();
+        new Date().getHours();
 
 
-    let greeting =
-        "Good morning";
+    let greeting = "Good morning";
 
 
     if (hour >= 12 && hour < 17) {
@@ -1251,9 +1242,7 @@ function setTodayHeading() {
 function setGreeting() {
 
     const element =
-        document.getElementById(
-            "auraGreeting"
-        );
+        document.getElementById("auraGreeting");
 
     if (!element) return;
 
@@ -1262,8 +1251,7 @@ function setGreeting() {
         new Date().getHours();
 
 
-    let greeting =
-        "Good morning";
+    let greeting = "Good morning";
 
 
     if (hour >= 12 && hour < 17) {
@@ -1305,19 +1293,13 @@ function setGreeting() {
 function setupChat() {
 
     const input =
-        document.getElementById(
-            "commandInput"
-        );
+        document.getElementById("commandInput");
 
     const send =
-        document.getElementById(
-            "sendCommand"
-        );
+        document.getElementById("sendCommand");
 
     const clear =
-        document.getElementById(
-            "clearChat"
-        );
+        document.getElementById("clearChat");
 
 
     if (send) {
@@ -1327,13 +1309,15 @@ function setupChat() {
             () => {
 
                 const command =
-                    input.value.trim();
+                    input?.value.trim();
 
                 if (!command) return;
 
                 processCommand(command);
 
-                input.value = "";
+                if (input) {
+                    input.value = "";
+                }
 
             }
         );
@@ -1375,9 +1359,9 @@ function setupChat() {
             () => {
 
                 const chat =
-                    document.getElementById(
-                        "chatBox"
-                    );
+                    document.getElementById("chatBox");
+
+                if (!chat) return;
 
                 chat.innerHTML = "";
 
@@ -1412,14 +1396,15 @@ async function processCommand(command) {
     /* GREETING */
 
     if (
-        text.includes("hello") ||
-        text.includes("hi aura") ||
         text === "hi" ||
+        text === "hello" ||
+        text.includes("hi aura") ||
+        text.includes("hello aura") ||
         text.includes("hey")
     ) {
 
         reply(
-            "Hello! 💜 I'm AURA. Tell me what you want to schedule or ask me anything about your calendar."
+            "Hello! 💜 I'm AURA. How can I help you?"
         );
 
         return;
@@ -1451,21 +1436,21 @@ async function processCommand(command) {
         if (!list.length) {
 
             reply(
-                "You have no events scheduled for today. ✨ You have a free day!"
+                "You have no events scheduled for today. ✨"
             );
 
         }
 
         else {
 
-            const message =
+            reply(
                 "Today's schedule:<br><br>" +
-                list.map(event =>
-                    `• ${formatTime(event.time)} — ${escapeHTML(event.title)}`
-                ).join("<br>");
-
-
-            reply(message);
+                list
+                    .map(event =>
+                        `• ${formatTime(event.time)} — ${escapeHTML(event.title)}`
+                    )
+                    .join("<br>")
+            );
 
         }
 
@@ -1479,7 +1464,7 @@ async function processCommand(command) {
     if (
         text.includes("free time") ||
         text.includes("free slot") ||
-        text.includes("free")
+        text === "free"
     ) {
 
         const today =
@@ -1492,21 +1477,11 @@ async function processCommand(command) {
             );
 
 
-        if (!todayEvents.length) {
-
-            reply(
-                "You have a lot of free time today! 🌸 Your calendar is empty."
-            );
-
-        }
-
-        else {
-
-            reply(
-                `You have approximately ${calculateFreeHours(todayEvents)} hours of free time today.`
-            );
-
-        }
+        reply(
+            todayEvents.length
+                ? `You have approximately ${calculateFreeHours(todayEvents)} hours of free time today.`
+                : "You have plenty of free time today! 🌸"
+        );
 
         return;
 
@@ -1545,10 +1520,12 @@ async function processCommand(command) {
 
             reply(
                 "Upcoming important days:<br><br>" +
-                upcoming.map(
-                    f =>
-                    `🎉 ${formatPrettyDate(f.date)} — ${escapeHTML(f.name)}`
-                ).join("<br>")
+                upcoming
+                    .map(
+                        f =>
+                            `🎉 ${formatPrettyDate(f.date)} — ${escapeHTML(f.name)}`
+                    )
+                    .join("<br>")
             );
 
         }
@@ -1570,7 +1547,7 @@ async function processCommand(command) {
 
 
         reply(
-            `For studying, I suggest <b>${suggestion}</b>. 📚<br><br>It looks like a good time to focus without overlapping your current schedule.`
+            `For studying, I suggest <b>${suggestion}</b>. 📚`
         );
 
         return;
@@ -1587,9 +1564,7 @@ async function processCommand(command) {
 
         if (!events.length) {
 
-            reply(
-                "There are no events to delete."
-            );
+            reply("There are no events to delete.");
 
             return;
 
@@ -1629,7 +1604,7 @@ async function processCommand(command) {
         if (!parsed.title) {
 
             reply(
-                "Sure 💜 Tell me the event name, date and time. Example: <b>Schedule project meeting tomorrow at 5 PM</b>"
+                "Sure 💜 Tell me the event name, date and time."
             );
 
             openEventModal();
@@ -1665,24 +1640,17 @@ async function processCommand(command) {
 
         reply(`
 
-            I can help you with many things 💜
+            I can help you with:
 
             <br><br>
 
             📅 Create events<br>
             ⏰ Set reminders<br>
-            🗓️ Check your schedule<br>
+            🗓️ Check schedules<br>
             🕐 Find free time<br>
             🎉 Check festivals<br>
             📚 Suggest study time<br>
-            🔊 Speak responses<br>
-            🎙️ Listen to voice commands
-
-            <br><br>
-
-            Try saying:
-            <br>
-            <b>"Schedule assignment tomorrow at 7 PM"</b>
+            🎙️ Voice commands
 
         `);
 
@@ -1694,7 +1662,7 @@ async function processCommand(command) {
     /* DEFAULT */
 
     reply(
-        `I understood: "<b>${escapeHTML(command)}</b>" 💜<br><br>Try asking me about your schedule, festivals, free time, or say <b>"Schedule meeting tomorrow at 5 PM"</b>.`
+        `I understood: "<b>${escapeHTML(command)}</b>" 💜<br><br>Ask me about your schedule, festivals or free time.`
     );
 
 }
@@ -1722,12 +1690,14 @@ function parseCommand(command) {
         "12:00";
 
 
+    const lower =
+        command.toLowerCase();
+
+
     /* TOMORROW */
 
     if (
-        /tomorrow|उद्या|कल/.test(
-            command.toLowerCase()
-        )
+        /tomorrow|उद्या|उद्या/.test(lower)
     ) {
 
         const tomorrow =
@@ -1746,9 +1716,7 @@ function parseCommand(command) {
     /* DAY AFTER TOMORROW */
 
     if (
-        /day after tomorrow/.test(
-            command.toLowerCase()
-        )
+        lower.includes("day after tomorrow")
     ) {
 
         const day =
@@ -1764,7 +1732,20 @@ function parseCommand(command) {
     }
 
 
-    /* DATE DD/MM/YYYY */
+    /* TODAY */
+
+    if (
+        lower.includes("today") ||
+        lower.includes("आज")
+    ) {
+
+        date =
+            formatDateInput(now);
+
+    }
+
+
+    /* DD/MM/YYYY */
 
     const dateMatch =
         command.match(
@@ -1775,10 +1756,10 @@ function parseCommand(command) {
     if (dateMatch) {
 
         const day =
-            dateMatch[1].padStart(2,"0");
+            dateMatch[1].padStart(2, "0");
 
         const month =
-            dateMatch[2].padStart(2,"0");
+            dateMatch[2].padStart(2, "0");
 
         const year =
             dateMatch[3];
@@ -1820,7 +1801,7 @@ function parseCommand(command) {
 
 
         time =
-            `${String(hour).padStart(2,"0")}:${String(minute).padStart(2,"0")}`;
+            `${String(hour).padStart(2, "0")}:${String(minute).padStart(2, "0")}`;
 
 
         title =
@@ -1832,56 +1813,20 @@ function parseCommand(command) {
     }
 
 
+    /* REMOVE COMMAND WORDS */
+
     title =
         title
-            .replace(
-                /schedule/gi,
-                ""
-            )
-            .replace(
-                /scheduled/gi,
-                ""
-            )
-            .replace(
-                /meeting/gi,
-                "Meeting"
-            )
-            .replace(
-                /tomorrow/gi,
-                ""
-            )
-            .replace(
-                /today/gi,
-                ""
-            )
-            .replace(
-                /at/gi,
-                ""
-            )
-            .replace(
-                /on/gi,
-                ""
-            )
-            .replace(
-                /please/gi,
-                ""
-            )
-            .replace(
-                /remind me/gi,
-                ""
-            )
-            .replace(
-                /add event/gi,
-                ""
-            )
-            .replace(
-                /create event/gi,
-                ""
-            )
-            .replace(
-                /\s+/g,
-                " "
-            )
+            .replace(/schedule/gi, "")
+            .replace(/scheduled/gi, "")
+            .replace(/meeting/gi, "Meeting")
+            .replace(/tomorrow/gi, "")
+            .replace(/today/gi, "")
+            .replace(/please/gi, "")
+            .replace(/remind me/gi, "")
+            .replace(/add event/gi, "")
+            .replace(/create event/gi, "")
+            .replace(/\s+/g, " ")
             .trim();
 
 
@@ -1967,15 +1912,13 @@ async function createEventFromCommand(parsed) {
         renderAllEvents();
 
 
+        /* IMPORTANT:
+           Do NOT show another toast here.
+           processCommand() will show the reply.
+        */
+
         speak(
             `I've scheduled ${parsed.title}`
-        );
-
-
-        showToast(
-            "AURA Scheduled",
-            parsed.title,
-            "✨"
         );
 
 
@@ -1988,7 +1931,7 @@ async function createEventFromCommand(parsed) {
         console.error(error);
 
         reply(
-            "Sorry 💜 I couldn't save that event. Please check that the Flask server is running."
+            "Sorry 💜 I couldn't save that event."
         );
 
         return false;
@@ -2005,10 +1948,7 @@ async function createEventFromCommand(parsed) {
 function addUserMessage(message) {
 
     const chat =
-        document.getElementById(
-            "chatBox"
-        );
-
+        document.getElementById("chatBox");
 
     if (!chat) return;
 
@@ -2045,10 +1985,7 @@ function addUserMessage(message) {
 function addAURAMessage(message) {
 
     const chat =
-        document.getElementById(
-            "chatBox"
-        );
-
+        document.getElementById("chatBox");
 
     if (!chat) return;
 
@@ -2094,21 +2031,23 @@ function reply(message) {
 
 
 /* =========================================================
-   VOICE
+   VOICE SETUP
 ========================================================= */
 
 function setupVoice() {
 
     const voiceBtn =
-        document.getElementById(
-            "voiceBtn"
-        );
+        document.getElementById("voiceBtn");
 
     const chatMic =
-        document.getElementById(
-            "chatMic"
-        );
+        document.getElementById("chatMic");
 
+    const SpeechRecognition =
+        window.SpeechRecognition ||
+        window.webkitSpeechRecognition;
+
+
+    /* BUTTONS */
 
     if (voiceBtn) {
 
@@ -2130,112 +2069,242 @@ function setupVoice() {
     }
 
 
-    if (
-        "webkitSpeechRecognition"
-        in window ||
-        "SpeechRecognition"
-        in window
-    ) {
+    /* BROWSER SUPPORT */
 
-        const SpeechRecognition =
-            window.SpeechRecognition ||
-            window.webkitSpeechRecognition;
+    if (!SpeechRecognition) {
 
+        recognitionSupported = false;
 
-        recognition =
-            new SpeechRecognition();
+        console.warn(
+            "Speech Recognition is not supported."
+        );
 
-
-        recognition.continuous = false;
-
-        recognition.interimResults = false;
-
-        recognition.lang =
-            selectedLanguage;
-
-
-        recognition.onstart = () => {
-
-            isListening = true;
-
-            updateVoiceUI(true);
-
-            showToast(
-                "AURA Listening",
-                "Speak now...",
-                "🎙️"
-            );
-
-        };
-
-
-        recognition.onresult =
-            event => {
-
-                const transcript =
-                    event.results[0][0].transcript;
-
-
-                const input =
-                    document.getElementById(
-                        "commandInput"
-                    );
-
-
-                if (input) {
-                    input.value = transcript;
-                }
-
-
-                processCommand(
-                    transcript
-                );
-
-            };
-
-
-        recognition.onerror =
-            event => {
-
-                console.error(
-                    "Voice error:",
-                    event.error
-                );
-
-                showToast(
-                    "Voice Error",
-                    "Please allow microphone access.",
-                    "⚠️"
-                );
-
-            };
-
-
-        recognition.onend = () => {
-
-            isListening = false;
-
-            updateVoiceUI(false);
-
-        };
+        return;
 
     }
+
+
+    recognitionSupported = true;
+
+    recognition =
+        new SpeechRecognition();
+
+
+    recognition.continuous =
+        false;
+
+    recognition.interimResults =
+        false;
+
+    recognition.maxAlternatives =
+        1;
+
+    recognition.lang =
+        selectedLanguage;
+
+
+    /* =====================================================
+       VOICE START
+    ===================================================== */
+
+    recognition.onstart = () => {
+
+        isListening = true;
+
+        updateVoiceUI(true);
+
+        showToast(
+            "AURA Listening",
+            "🎙️ Speak now...",
+            "🎙️"
+        );
+
+        console.log("🎙️ AURA listening...");
+
+    };
+
+
+    /* =====================================================
+       VOICE RESULT
+    ===================================================== */
+
+    recognition.onresult = event => {
+
+        if (
+            !event.results ||
+            !event.results.length
+        ) {
+            return;
+        }
+
+
+        const transcript =
+            event.results[0][0].transcript.trim();
+
+
+        console.log(
+            "🎤 User said:",
+            transcript
+        );
+
+
+        const input =
+            document.getElementById(
+                "commandInput"
+            );
+
+
+        if (input) {
+            input.value = transcript;
+        }
+
+
+        /* stop listening UI immediately */
+
+        isListening = false;
+
+        updateVoiceUI(false);
+
+
+        /* PROCESS COMMAND */
+
+        if (transcript) {
+
+            processCommand(transcript);
+
+        }
+
+    };
+
+
+    /* =====================================================
+       VOICE ERROR
+    ===================================================== */
+
+    recognition.onerror = event => {
+
+        console.error(
+            "🎙️ Speech recognition error:",
+            event.error
+        );
+
+
+        isListening = false;
+
+        updateVoiceUI(false);
+
+
+        let message =
+            "Voice input failed.";
+
+
+        switch (event.error) {
+
+            case "not-allowed":
+                message =
+                    "Microphone permission denied. Allow microphone access in Chrome.";
+                break;
+
+            case "audio-capture":
+                message =
+                    "No microphone found. Check your microphone.";
+                break;
+
+            case "no-speech":
+                message =
+                    "I didn't hear anything. Please try again.";
+                break;
+
+            case "network":
+                message =
+                    "Voice service needs an internet connection.";
+                break;
+
+            case "aborted":
+                return;
+
+            default:
+                message =
+                    "Please try speaking again.";
+
+        }
+
+
+        showToast(
+            "Voice Problem",
+            message,
+            "⚠️"
+        );
+
+    };
+
+
+    /* =====================================================
+       VOICE END
+    ===================================================== */
+
+    recognition.onend = () => {
+
+        isListening = false;
+
+        updateVoiceUI(false);
+
+        console.log(
+            "🎙️ AURA stopped listening."
+        );
+
+    };
 
 }
 
 
 /* =========================================================
-   START VOICE
+   START VOICE INPUT
 ========================================================= */
 
 function startVoiceInput() {
 
-    if (!recognition) {
+    /* Already listening */
+
+    if (isListening) {
+
+        stopVoiceInput();
+
+        return;
+
+    }
+
+
+    /* Browser unsupported */
+
+    if (
+        !recognition ||
+        !recognitionSupported
+    ) {
 
         showToast(
-            "Voice unavailable",
-            "Use Google Chrome for voice input.",
+            "Voice Unavailable",
+            "Please use Google Chrome on HTTPS.",
             "🎙️"
+        );
+
+        return;
+
+    }
+
+
+    /* Mobile browser */
+
+    if (
+        !window.isSecureContext &&
+        location.hostname !== "localhost" &&
+        location.hostname !== "127.0.0.1"
+    ) {
+
+        showToast(
+            "Secure Connection Required",
+            "Voice needs HTTPS.",
+            "🔒"
         );
 
         return;
@@ -2256,35 +2325,9 @@ function startVoiceInput() {
     catch (error) {
 
         console.log(
-            "Recognition already active."
+            "Recognition start:",
+            error.message
         );
-
-    }
-
-}
-
-
-function updateVoiceUI(active) {
-
-    const voiceBtn =
-        document.getElementById(
-            "voiceBtn"
-        );
-
-
-    if (!voiceBtn) return;
-
-
-    const span =
-        voiceBtn.querySelector("span");
-
-
-    if (span) {
-
-        span.textContent =
-            active
-                ? "Listening..."
-                : "Tap & Speak";
 
     }
 
@@ -2292,19 +2335,154 @@ function updateVoiceUI(active) {
 
 
 /* =========================================================
-   FEMALE VOICE
+   STOP VOICE
+========================================================= */
+
+function stopVoiceInput() {
+
+    if (!recognition) return;
+
+
+    try {
+
+        recognition.stop();
+
+    }
+
+    catch (error) {
+
+        console.log(error);
+
+    }
+
+
+    isListening = false;
+
+    updateVoiceUI(false);
+
+}
+
+
+/* =========================================================
+   VOICE UI
+========================================================= */
+
+function updateVoiceUI(active) {
+
+    const voiceBtn =
+        document.getElementById("voiceBtn");
+
+    const auraOrb =
+        document.getElementById("auraOrb");
+
+    const bigAuraOrb =
+        document.getElementById("bigAuraOrb");
+
+
+    /* BUTTON */
+
+    if (voiceBtn) {
+
+        const span =
+            voiceBtn.querySelector("span");
+
+
+        if (span) {
+
+            span.textContent =
+                active
+                    ? "Listening..."
+                    : "Tap & Speak";
+
+        }
+
+
+        voiceBtn.classList.toggle(
+            "listening",
+            active
+        );
+
+        voiceBtn.setAttribute(
+            "aria-label",
+            active
+                ? "AURA is listening"
+                : "Tap to speak to AURA"
+        );
+
+    }
+
+
+    /* HERO ORB */
+
+    if (auraOrb) {
+
+        auraOrb.classList.toggle(
+            "listening",
+            active
+        );
+
+        auraOrb.setAttribute(
+            "aria-label",
+            active
+                ? "AURA is listening"
+                : "Tap to speak"
+        );
+
+    }
+
+
+    /* BIG ORB */
+
+    if (bigAuraOrb) {
+
+        bigAuraOrb.classList.toggle(
+            "listening",
+            active
+        );
+
+    }
+
+
+    /* LISTENING TEXT */
+
+    const listeningText =
+        document.querySelector(
+            ".tap-to-speak"
+        );
+
+
+    if (listeningText) {
+
+        listeningText.textContent =
+            active
+                ? "Listening..."
+                : "Tap to speak";
+
+    }
+
+}
+
+
+/* =========================================================
+   AURA FEMALE VOICE
 ========================================================= */
 
 function speak(text) {
 
+    if (!text) return;
+
+
     if (
         !("speechSynthesis" in window)
     ) {
+
+        console.warn(
+            "Speech synthesis unavailable."
+        );
+
         return;
+
     }
-
-
-    if (!text) return;
 
 
     window.speechSynthesis.cancel();
@@ -2321,11 +2499,11 @@ function speak(text) {
 
 
     utterance.rate =
-        0.95;
+        0.92;
 
 
     utterance.pitch =
-        1.15;
+        1.18;
 
 
     utterance.volume =
@@ -2336,20 +2514,35 @@ function speak(text) {
         window.speechSynthesis.getVoices();
 
 
-    const female =
+    let femaleVoice =
         voices.find(
             voice =>
-                /female|zira|samantha|google uk english female|google us english/i
-                    .test(
-                        voice.name
-                    )
+                voice.lang.startsWith(
+                    selectedLanguage.split("-")[0]
+                )
+                &&
+                /female|zira|samantha|google|heera|neerja/i
+                    .test(voice.name)
         );
 
 
-    if (female) {
+    if (!femaleVoice) {
+
+        femaleVoice =
+            voices.find(
+                voice =>
+                    voice.lang.startsWith(
+                        selectedLanguage.split("-")[0]
+                    )
+            );
+
+    }
+
+
+    if (femaleVoice) {
 
         utterance.voice =
-            female;
+            femaleVoice;
 
     }
 
@@ -2361,15 +2554,8 @@ function speak(text) {
 }
 
 
-/* Chrome loads voices asynchronously */
-window.speechSynthesis?.addEventListener(
-    "voiceschanged",
-    () => {}
-);
-
-
 /* =========================================================
-   LANGUAGES
+   LANGUAGE
 ========================================================= */
 
 function setupLanguages() {
@@ -2384,17 +2570,12 @@ function setupLanguages() {
 
                     document
                         .querySelectorAll(".language-btn")
-                        .forEach(
-                            btn =>
-                            btn.classList.remove(
-                                "active"
-                            )
+                        .forEach(btn =>
+                            btn.classList.remove("active")
                         );
 
 
-                    button.classList.add(
-                        "active"
-                    );
+                    button.classList.add("active");
 
 
                     selectedLanguage =
@@ -2431,19 +2612,13 @@ function setupLanguages() {
 function setupNotifications() {
 
     const button =
-        document.getElementById(
-            "notificationBtn"
-        );
+        document.getElementById("notificationBtn");
 
     const panel =
-        document.getElementById(
-            "notificationPanel"
-        );
+        document.getElementById("notificationPanel");
 
     const close =
-        document.getElementById(
-            "closeNotifications"
-        );
+        document.getElementById("closeNotifications");
 
 
     if (button) {
@@ -2452,9 +2627,7 @@ function setupNotifications() {
             "click",
             () => {
 
-                panel?.classList.toggle(
-                    "show"
-                );
+                panel?.classList.toggle("show");
 
                 renderNotifications();
 
@@ -2470,9 +2643,7 @@ function setupNotifications() {
             "click",
             () => {
 
-                panel?.classList.remove(
-                    "show"
-                );
+                panel?.classList.remove("show");
 
             }
         );
@@ -2489,14 +2660,11 @@ function renderNotifications() {
             "notificationList"
         );
 
-
     if (!container) return;
 
 
     const today =
-        formatDateInput(
-            new Date()
-        );
+        formatDateInput(new Date());
 
 
     const upcoming =
@@ -2566,10 +2734,7 @@ function showToast(
 ) {
 
     const toast =
-        document.getElementById(
-            "toast"
-        );
-
+        document.getElementById("toast");
 
     if (!toast) return;
 
@@ -2595,12 +2760,19 @@ function showToast(
     toast.classList.add("show");
 
 
-    setTimeout(
-        () => {
+    /* Prevent multiple timers */
+
+    if (toastTimer) {
+        clearTimeout(toastTimer);
+    }
+
+
+    toastTimer =
+        setTimeout(() => {
+
             toast.classList.remove("show");
-        },
-        3500
-    );
+
+        }, 2500);
 
 }
 
@@ -2613,7 +2785,6 @@ function setText(id, value) {
 
     const element =
         document.getElementById(id);
-
 
     if (element) {
         element.textContent = value;
@@ -2628,14 +2799,12 @@ function formatDateInput(date) {
         date.getFullYear();
 
     const month =
-        String(
-            date.getMonth() + 1
-        ).padStart(2, "0");
+        String(date.getMonth() + 1)
+            .padStart(2, "0");
 
     const day =
-        String(
-            date.getDate()
-        ).padStart(2, "0");
+        String(date.getDate())
+            .padStart(2, "0");
 
 
     return `${year}-${month}-${day}`;
@@ -2675,6 +2844,7 @@ function formatTime(time) {
     let hour =
         Number(parts[0]);
 
+
     const minute =
         parts[1] || "00";
 
@@ -2697,26 +2867,11 @@ function formatTime(time) {
 function escapeHTML(value) {
 
     return String(value ?? "")
-        .replace(
-            /&/g,
-            "&amp;"
-        )
-        .replace(
-            /</g,
-            "&lt;"
-        )
-        .replace(
-            />/g,
-            "&gt;"
-        )
-        .replace(
-            /"/g,
-            "&quot;"
-        )
-        .replace(
-            /'/g,
-            "&#039;"
-        );
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
 
 }
 
@@ -2724,15 +2879,16 @@ function escapeHTML(value) {
 function stripHTML(text) {
 
     const div =
-        document.createElement(
-            "div"
-        );
+        document.createElement("div");
 
-    div.innerHTML = text;
+    div.innerHTML =
+        text;
 
-    return div.textContent ||
+    return (
+        div.textContent ||
         div.innerText ||
-        "";
+        ""
+    );
 
 }
 
@@ -2740,8 +2896,7 @@ function stripHTML(text) {
 function calculateFreeHours(list) {
 
     const occupied =
-        list.length * 1;
-
+        list.length;
 
     return Math.max(
         0,
@@ -2762,18 +2917,18 @@ function suggestStudyTime() {
 
 
     const today =
-        formatDateInput(
-            new Date()
-        );
+        formatDateInput(new Date());
 
 
     const busy =
         events
             .filter(
-                e => e.date === today
+                event =>
+                    event.date === today
             )
             .map(
-                e => formatTime(e.time)
+                event =>
+                    formatTime(event.time)
             );
 
 
@@ -2807,11 +2962,14 @@ window.openEventModal =
 window.startVoiceInput =
     startVoiceInput;
 
+window.stopVoiceInput =
+    stopVoiceInput;
+
 
 /* =========================================================
    FINAL
 ========================================================= */
 
 console.log(
-    "✨ AURA AI Smart Calendar loaded successfully"
+    "✨ AURA AI Smart Calendar - Mobile Voice Edition loaded"
 );
