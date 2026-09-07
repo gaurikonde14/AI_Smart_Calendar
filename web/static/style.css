@@ -1,17 +1,23 @@
 /* =========================================================
    AURA FINAL FIX
-   TAP TO SPEAK + TOAST + MOBILE
+   TAP TO SPEAK CENTER + MOBILE RESPONSIVE
 ========================================================= */
 
 
 /* =========================================================
-   AURA ORB - CENTER TAP TO SPEAK
+   HERO AURA
 ========================================================= */
 
 .hero-aura {
     position: relative;
 
+    width: 250px;
+    height: 250px;
+
+    flex-shrink: 0;
+
     display: flex;
+
     align-items: center;
     justify-content: center;
 
@@ -21,10 +27,22 @@
 }
 
 
-/* Tap to speak text */
+/* =========================================================
+   HIDE OLD HTML TAP TEXT
+========================================================= */
+
+.hero-aura > p {
+    display: none !important;
+}
+
+
+/* =========================================================
+   CENTER TAP TO SPEAK
+========================================================= */
 
 .hero-aura::after {
-    content: "✦  Tap to speak";
+
+    content: "🎙️  Tap to speak";
 
     position: absolute;
 
@@ -33,11 +51,18 @@
 
     transform: translate(-50%, -50%);
 
-    z-index: 10;
+    z-index: 100;
 
-    color: white;
+    display: flex;
 
-    font-size: 16px;
+    align-items: center;
+    justify-content: center;
+
+    width: max-content;
+
+    color: #ffffff;
+
+    font-size: 15px;
 
     font-weight: 700;
 
@@ -45,16 +70,22 @@
 
     white-space: nowrap;
 
+    text-align: center;
+
     text-shadow:
-        0 2px 15px rgba(0,0,0,0.8);
+        0 2px 8px rgba(0,0,0,0.9),
+        0 0 15px rgba(0,212,255,0.5);
 
     pointer-events: none;
 }
 
 
-/* Glow behind orb */
+/* =========================================================
+   CENTER GLOW
+========================================================= */
 
 .hero-aura::before {
+
     content: "";
 
     position: absolute;
@@ -70,13 +101,13 @@
     background:
         radial-gradient(
             circle,
-            rgba(255,255,255,0.95),
-            rgba(0,212,255,0.8),
-            rgba(124,92,255,0.5),
+            rgba(255,255,255,0.95) 0%,
+            rgba(0,212,255,0.85) 25%,
+            rgba(124,92,255,0.65) 55%,
             transparent 75%
         );
 
-    filter: blur(12px);
+    filter: blur(15px);
 
     z-index: -1;
 
@@ -85,26 +116,40 @@
 
 
 /* =========================================================
-   TAP TO SPEAK HOVER
+   AURA HOVER
 ========================================================= */
 
 .hero-aura:hover {
+
     filter: brightness(1.12);
 
     transform: scale(1.02);
 
-    transition: 0.25s;
+    transition: transform 0.25s ease,
+                filter 0.25s ease;
 }
 
 
 /* =========================================================
-   WHEN SPEAKING
+   AURA CLICK
+========================================================= */
+
+.hero-aura:active {
+
+    transform: scale(0.97);
+}
+
+
+/* =========================================================
+   SPEAKING ANIMATION
 ========================================================= */
 
 .hero-aura.speaking {
+
     animation:
         auraSpeaking 1s ease-in-out infinite;
 }
+
 
 @keyframes auraSpeaking {
 
@@ -113,7 +158,7 @@
     }
 
     50% {
-        transform: scale(1.08);
+        transform: scale(1.07);
     }
 
     100% {
@@ -124,15 +169,16 @@
 
 /* =========================================================
    SUCCESS TOAST
-   HIDDEN BY DEFAULT
 ========================================================= */
 
 .toast {
+
     display: none;
 
     position: fixed;
 
     left: 50%;
+
     bottom: 25px;
 
     transform: translateX(-50%);
@@ -166,9 +212,10 @@
 }
 
 
-/* JS adds .show */
+/* SHOW TOAST */
 
 .toast.show {
+
     display: block;
 
     animation:
@@ -179,6 +226,7 @@
 @keyframes toastIn {
 
     from {
+
         opacity: 0;
 
         transform:
@@ -186,6 +234,7 @@
     }
 
     to {
+
         opacity: 1;
 
         transform:
@@ -195,24 +244,32 @@
 
 
 /* =========================================================
-   MOBILE
+   TABLET
 ========================================================= */
 
 @media (max-width: 800px) {
 
     .app {
+
         display: block;
     }
 
 
-    /* MOBILE TOP NAV */
+    /* =====================================================
+       MOBILE NAVIGATION
+    ===================================================== */
 
     .sidebar {
 
         position: sticky;
 
         top: 0;
+
         left: 0;
+
+        right: 0;
+
+        bottom: auto;
 
         width: 100%;
 
@@ -220,7 +277,9 @@
 
         min-height: auto;
 
-        padding: 10px;
+        padding: 10px 12px;
+
+        display: flex;
 
         flex-direction: row;
 
@@ -242,6 +301,8 @@
     }
 
 
+    /* BRAND */
+
     .brand {
 
         padding: 0;
@@ -255,6 +316,7 @@
     .brand-orb {
 
         width: 40px;
+
         height: 40px;
 
         border-radius: 12px;
@@ -264,16 +326,18 @@
 
 
     .brand h1 {
+
         font-size: 17px;
     }
 
 
     .brand p {
+
         font-size: 8px;
     }
 
 
-    /* NAV SCROLL */
+    /* NAV */
 
     .navigation {
 
@@ -294,6 +358,7 @@
 
 
     .navigation::-webkit-scrollbar {
+
         display: none;
     }
 
@@ -313,6 +378,8 @@
         font-size: 10px;
 
         white-space: nowrap;
+
+        flex-shrink: 0;
     }
 
 
@@ -325,11 +392,14 @@
 
 
     .sidebar-assistant {
+
         display: none;
     }
 
 
-    /* MAIN */
+    /* =====================================================
+       MAIN
+    ===================================================== */
 
     .main {
 
@@ -342,7 +412,9 @@
     }
 
 
-    /* TOPBAR */
+    /* =====================================================
+       TOPBAR
+    ===================================================== */
 
     .topbar {
 
@@ -363,11 +435,13 @@
 
 
     .welcome-text {
+
         font-size: 10px;
     }
 
 
     .live-clock {
+
         display: none;
     }
 
@@ -376,6 +450,7 @@
     .avatar-button {
 
         width: 37px;
+
         height: 37px;
 
         border-radius: 10px;
@@ -385,7 +460,7 @@
 
 
     /* =====================================================
-       MOBILE HERO
+       HERO
     ===================================================== */
 
     .hero-card {
@@ -447,7 +522,7 @@
 
 
     /* =====================================================
-       MOBILE AURA
+       AURA - MOBILE CENTER
     ===================================================== */
 
     .hero-aura {
@@ -467,13 +542,14 @@
 
     .hero-aura::after {
 
-        font-size: 14px;
-
         top: 50%;
+
         left: 50%;
 
         transform:
             translate(-50%, -50%);
+
+        font-size: 13px;
     }
 
 
@@ -505,6 +581,7 @@
     .stat-icon {
 
         width: 34px;
+
         height: 34px;
 
         border-radius: 9px;
@@ -514,11 +591,13 @@
 
 
     .stat-card span {
+
         font-size: 8px;
     }
 
 
     .stat-card strong {
+
         font-size: 19px;
     }
 
@@ -583,6 +662,7 @@
 
 
     .calendar-day-number {
+
         font-size: 10px;
     }
 
@@ -614,6 +694,7 @@
 
 
     .festival-filters::-webkit-scrollbar {
+
         display: none;
     }
 
@@ -659,6 +740,7 @@
     .big-aura {
 
         width: 210px;
+
         height: 210px;
     }
 
@@ -705,6 +787,7 @@
     .send-btn {
 
         width: 37px;
+
         height: 37px;
     }
 
@@ -766,7 +849,7 @@
 
 
     /* =====================================================
-       TOAST MOBILE
+       TOAST
     ===================================================== */
 
     .toast {
@@ -795,6 +878,10 @@
 }
 
 
+/* =========================================================
+   MOBILE TOAST
+========================================================= */
+
 @keyframes mobileToastIn {
 
     from {
@@ -816,17 +903,19 @@
 
 
 /* =========================================================
-   VERY SMALL PHONES
+   VERY SMALL PHONE
 ========================================================= */
 
 @media (max-width: 380px) {
 
     .brand p {
+
         display: none;
     }
 
 
     .brand h1 {
+
         font-size: 15px;
     }
 
@@ -834,6 +923,7 @@
     .brand-orb {
 
         width: 36px;
+
         height: 36px;
     }
 
@@ -847,11 +937,13 @@
 
 
     .nav-item span {
+
         font-size: 13px;
     }
 
 
     .hero-content h1 {
+
         font-size: 27px;
     }
 
@@ -866,26 +958,30 @@
 
     .hero-aura::after {
 
-        font-size: 12px;
+        font-size: 11px;
     }
 
 
     .stats-grid {
+
         gap: 6px;
     }
 
 
     .stat-card {
+
         padding: 9px 7px;
     }
 
 
     .stat-card strong {
+
         font-size: 17px;
     }
 
 
     .calendar-day {
+
         min-height: 47px;
     }
 }
