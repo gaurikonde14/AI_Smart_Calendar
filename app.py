@@ -396,6 +396,8 @@ def test_api():
 # ============================================================
 # START APPLICATION
 # ============================================================
+# Initialize database for Render / Gunicorn
+init_database()
 
 if __name__ == "__main__":
 
