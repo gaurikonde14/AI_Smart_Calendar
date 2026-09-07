@@ -1,1487 +1,860 @@
-\<!DOCTYPE html>
-\<html lang="en">
-\<head>
-    \<meta charset="UTF-8">
-    \<meta name="viewport" content="width=device-width, initial-scale=1.0">
+/* =========================================================
+   AURA - MOBILE RESPONSIVE FIX
+   ========================================================= */
+
+html,
+body {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+img {
+    max-width: 100%;
+}
+
+
+/* =========================================================
+   TABLET + MOBILE
+   ========================================================= */
+
+@media (max-width: 900px) {
+
+    /* MAIN APP */
+    .app {
+        display: block !important;
+        width: 100% !important;
+        min-height: 100vh;
+    }
+
+    /* SIDEBAR */
+    .sidebar {
+        position: relative !important;
+        top: 0 !important;
+        left: 0 !important;
+
+        width: 100% !important;
+        height: auto !important;
+        min-height: auto !important;
+
+        padding: 14px !important;
+
+        border-right: none !important;
+        border-bottom: 1px solid rgba(255,255,255,0.08);
+
+        z-index: 100;
+    }
+
+    /* BRAND */
+    .brand {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        margin-bottom: 14px;
+    }
+
+    .brand h1 {
+        font-size: 22px !important;
+        margin: 0;
+    }
+
+    .brand p {
+        font-size: 11px !important;
+        margin: 2px 0 0;
+    }
+
+    .brand-orb {
+        width: 38px !important;
+        height: 38px !important;
+        flex-shrink: 0;
+    }
+
+    /* NAVIGATION */
+    .navigation {
+        width: 100%;
+        display: grid !important;
+        grid-template-columns: repeat(5, 1fr);
+        gap: 6px;
+    }
+
+    .nav-item {
+        width: 100% !important;
+        min-width: 0 !important;
+        padding: 9px 4px !important;
+
+        display: flex !important;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+
+        gap: 3px;
 
-    \<title>AURA | AI Smart Calendar\</title>
+        font-size: 10px !important;
+        border-radius: 10px !important;
 
-    \<link rel="stylesheet"
-          href="{{ url\_for('static', filename='style.css') }}">
+        white-space: normal !important;
+        text-align: center;
+    }
 
-    \<link rel="preconnect" href="[https://fonts.googleapis.com](https://fonts.googleapis.com)">
+    .nav-item span {
+        font-size: 17px !important;
+        line-height: 1;
+    }
 
-    \<link href="[https://fonts.googleapis.com/css2?family=Inter\:wght@400;500;600;700;800&family=Orbitron\:wght@500;700;800&display=swap](https://fonts.googleapis.com/css2?family=Inter\:wght@400;500;600;700;800\&family=Orbitron\:wght@500;700;800\&display=swap)"
-          rel="stylesheet">
-\</head>
+    /* SIDEBAR AURA STATUS */
+    .sidebar-assistant {
+        display: none !important;
+    }
 
-\<body>
 
-\<!-- =====================================================
-     BACKGROUND
-\===================================================== -->
+    /* =====================================================
+       MAIN
+       ===================================================== */
 
-\<div class="background">
-    \<div class="gradient-orb orb-one">\</div>
-    \<div class="gradient-orb orb-two">\</div>
-    \<div class="gradient-orb orb-three">\</div>
-\</div>
+    .main {
+        width: 100% !important;
+        max-width: 100% !important;
 
+        margin: 0 !important;
+        padding: 0 !important;
+    }
 
 
-\<!-- =====================================================
-     MAIN APP
-\===================================================== -->
+    /* =====================================================
+       TOP BAR
+       ===================================================== */
 
-\<div class="app">
+    .topbar {
+        width: 100% !important;
 
+        padding: 16px 14px !important;
 
+        display: flex !important;
+        flex-direction: column !important;
 
-\<!-- =====================================================
-     SIDEBAR
-\===================================================== -->
+        align-items: stretch !important;
+        gap: 14px !important;
+    }
 
-\<aside class="sidebar">
+    .welcome-text {
+        font-size: 12px !important;
+        margin-bottom: 4px !important;
+    }
 
-    \<div class="brand">
+    .topbar h2 {
+        font-size: 21px !important;
+        line-height: 1.25 !important;
+        margin: 0 !important;
+    }
 
-        \<div class="brand-orb">
-            ✦
-        \</div>
+    .top-actions {
+        width: 100% !important;
 
-        \<div>
-            \<h1>AURA\</h1>
-            \<p>AI Smart Calendar\</p>
-        \</div>
+        display: flex !important;
+        align-items: center !important;
 
-    \</div>
+        gap: 8px !important;
+    }
 
+    .live-clock {
+        flex: 1 !important;
+        min-width: 0 !important;
+    }
 
+    .icon-button,
+    .avatar-button {
+        flex-shrink: 0;
+    }
 
-    \<nav class="navigation">
 
-        \<button class="nav-item active"
-                data-section="dashboard">
+    /* =====================================================
+       SECTIONS
+       ===================================================== */
 
-            \<span>⌂\</span>
-            Dashboard
+    .section {
+        width: 100% !important;
+        max-width: 100% !important;
 
-        \</button>
+        padding: 16px 14px !important;
+        margin: 0 !important;
+    }
 
 
+    /* =====================================================
+       HERO
+       ===================================================== */
 
-        \<button class="nav-item"
-                data-section="calendar">
+    .hero-card {
+        width: 100% !important;
 
-            \<span>▣\</span>
-            Calendar
+        display: flex !important;
+        flex-direction: column !important;
 
-        \</button>
+        padding: 22px 18px !important;
 
+        gap: 25px !important;
+        overflow: hidden !important;
+    }
 
+    .hero-content {
+        width: 100% !important;
+        max-width: 100% !important;
+    }
 
-        \<button class="nav-item"
-                data-section="schedule">
+    .hero-label {
+        font-size: 10px !important;
+    }
 
-            \<span>◷\</span>
-            My Schedule
+    .hero-content h1 {
+        font-size: 27px !important;
+        line-height: 1.2 !important;
 
-        \</button>
+        margin-top: 12px !important;
+        margin-bottom: 12px !important;
+    }
 
+    .hero-content p {
+        font-size: 13px !important;
+        line-height: 1.6 !important;
+    }
 
+    .hero-actions {
+        width: 100% !important;
 
-        \<button class="nav-item"
-                data-section="festivals">
+        display: flex !important;
+        flex-direction: column !important;
 
-            \<span>✦\</span>
-            Festivals
+        gap: 10px !important;
+    }
 
-        \</button>
+    .hero-actions button {
+        width: 100% !important;
+        min-height: 46px;
+    }
 
 
+    /* =====================================================
+       AURA HERO ORB
+       ===================================================== */
 
-        \<button class="nav-item"
-                data-section="assistant">
+    .hero-aura {
+        width: 100% !important;
+        min-height: 230px !important;
 
-            \<span>♙\</span>
-            Ask AURA
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        justify-content: center !important;
 
-        \</button>
+        position: relative;
+    }
 
-    \</nav>
+    .aura-orb {
+        width: 115px !important;
+        height: 115px !important;
+    }
 
+    .aura-ring {
+        max-width: 150px;
+        max-height: 150px;
+    }
 
+    .voice-wave {
+        margin-top: 12px;
+    }
 
-    \<div class="sidebar-assistant">
 
-        \<div class="mini-orb">
-            ✦
-        \</div>
+    /* =====================================================
+       STATISTICS
+       ===================================================== */
 
-        \<div>
-            \<strong>AURA\</strong>
-            \<p>Always ready to help\</p>
-        \</div>
+    .stats-grid {
+        width: 100% !important;
 
-        \<span class="online-dot">\</span>
+        display: grid !important;
+        grid-template-columns: repeat(2, 1fr) !important;
 
-    \</div>
+        gap: 10px !important;
+        margin-top: 14px !important;
+    }
 
-\</aside>
+    .stat-card {
+        width: 100% !important;
+        min-width: 0 !important;
 
+        padding: 13px !important;
 
+        gap: 10px !important;
+    }
 
+    .stat-icon {
+        flex-shrink: 0;
+    }
 
+    .stat-card span {
+        font-size: 10px !important;
+    }
 
-\<!-- =====================================================
-     MAIN
-\===================================================== -->
+    .stat-card strong {
+        font-size: 20px !important;
+    }
 
-\<main class="main">
 
+    /* =====================================================
+       DASHBOARD PANELS
+       ===================================================== */
 
+    .dashboard-grid {
+        width: 100% !important;
 
-\<!-- =====================================================
-     TOP BAR
-\===================================================== -->
+        display: grid !important;
+        grid-template-columns: 1fr !important;
 
-\<header class="topbar">
+        gap: 14px !important;
+        margin-top: 14px !important;
+    }
 
-    \<div>
+    .panel {
+        width: 100% !important;
+        min-width: 0 !important;
 
-        \<p class="welcome-text">
-            Welcome back ✨
-        \</p>
+        padding: 16px !important;
+    }
 
-        \<h2 id="todayHeading">
-            Your smart day starts here
-        \</h2>
+    .panel-header {
+        gap: 10px;
+    }
 
-    \</div>
+    .panel-header h3 {
+        font-size: 17px !important;
+    }
 
+    .panel-header small {
+        font-size: 9px !important;
+    }
 
 
-    \<div class="top-actions">
+    /* =====================================================
+       AURA MESSAGE
+       ===================================================== */
 
-        \<div class="live-clock">
+    .aura-message {
+        width: 100% !important;
+        display: flex !important;
+        align-items: flex-start !important;
+        gap: 9px !important;
+    }
 
-            \<span>◷\</span>
+    .message-bubble {
+        min-width: 0 !important;
+        max-width: calc(100% - 45px) !important;
 
-            \<div>
+        overflow-wrap: anywhere;
+        word-break: break-word;
+    }
 
-                \<strong id="liveTime">
-                    \--:--
-                \</strong>
+    .message-bubble p {
+        font-size: 12px !important;
+        line-height: 1.55 !important;
+    }
 
-                \<small id="liveDate">
-                    Loading...
-                \</small>
 
-            \</div>
+    /* =====================================================
+       QUICK COMMANDS
+       ===================================================== */
 
-        \</div>
+    .quick-commands {
+        width: 100% !important;
 
+        display: grid !important;
+        grid-template-columns: 1fr 1fr !important;
 
+        gap: 8px !important;
+        margin-top: 14px !important;
+    }
 
-        \<button class="icon-button"
-                id="notificationBtn">
+    .quick-command {
+        width: 100% !important;
+        min-width: 0 !important;
 
-            🔔
+        padding: 10px 7px !important;
 
-            \<span class="notification-badge">
-                0
-            \</span>
+        font-size: 10px !important;
+        line-height: 1.3 !important;
 
-        \</button>
+        white-space: normal !important;
+    }
 
 
+    /* =====================================================
+       SECTION HEADING
+       ===================================================== */
 
-        \<button class="avatar-button">
-            G
-        \</button>
+    .section-heading {
+        width: 100% !important;
 
-    \</div>
+        display: flex !important;
+        flex-direction: column !important;
 
-\</header>
+        align-items: stretch !important;
+        gap: 14px !important;
+    }
 
+    .section-heading h2 {
+        font-size: 24px !important;
+        line-height: 1.25 !important;
+    }
 
+    .section-heading p {
+        font-size: 12px !important;
+    }
 
+    .section-heading .primary-btn {
+        width: 100% !important;
+    }
 
 
-\<!-- =====================================================
-     DASHBOARD
-\===================================================== -->
+    /* =====================================================
+       CALENDAR
+       ===================================================== */
 
-\<section class="section active"
-         id="dashboard">
+    .calendar-panel {
+        width: 100% !important;
+        max-width: 100% !important;
 
+        overflow: hidden !important;
+    }
 
+    .calendar-toolbar {
+        width: 100% !important;
 
-\<!-- HERO -->
+        display: flex !important;
+        align-items: center !important;
+        justify-content: space-between !important;
 
-\<div class="hero-card">
+        gap: 8px !important;
+    }
 
-    \<div class="hero-content">
+    .calendar-toolbar h3 {
+        font-size: 16px !important;
+        text-align: center;
+    }
 
-        \<div class="hero-label">
+    .calendar-arrow {
+        width: 40px !important;
+        height: 40px !important;
 
-            \<span class="status-dot">\</span>
+        flex-shrink: 0;
+    }
 
-            AURA IS ONLINE
+    .calendar-weekdays,
+    .calendar-days {
+        width: 100% !important;
 
-        \</div>
+        display: grid !important;
+        grid-template-columns: repeat(7, minmax(0, 1fr)) !important;
 
+        gap: 3px !important;
+    }
 
+    .calendar-weekdays span {
+        min-width: 0 !important;
 
-        \<h1>
+        font-size: 9px !important;
+        text-align: center;
+    }
 
-            Your day,
-            \<span>intelligently organized.\</span>
+    .calendar-day {
+        min-width: 0 !important;
+        width: 100% !important;
 
-        \</h1>
+        padding: 8px 2px !important;
 
+        font-size: 11px !important;
+        text-align: center !important;
 
+        overflow: hidden;
+    }
 
-        \<p>
 
-            Talk to AURA, create events, manage reminders,
-            check festivals and organize your entire day.
+    /* =====================================================
+       FESTIVAL FILTERS
+       ===================================================== */
 
-        \</p>
+    .festival-filters {
+        width: 100% !important;
 
+        display: flex !important;
 
+        overflow-x: auto !important;
+        gap: 7px !important;
 
-        \<div class="hero-actions">
+        padding-bottom: 5px;
+        scrollbar-width: none;
+    }
 
-            \<button class="primary-btn"
-                    id="openAssistantBtn">
+    .festival-filters::-webkit-scrollbar {
+        display: none;
+    }
 
-                🎙️ Talk to AURA
+    .filter-btn {
+        flex-shrink: 0 !important;
+        white-space: nowrap !important;
+    }
 
-            \</button>
 
+    /* =====================================================
+       FESTIVAL GRID
+       ===================================================== */
 
+    .festival-grid {
+        width: 100% !important;
 
-            \<button class="secondary-btn"
-                    id="createEventBtn">
+        display: grid !important;
+        grid-template-columns: 1fr !important;
 
-                ＋ Create Event
+        gap: 12px !important;
+    }
 
-            \</button>
 
-        \</div>
+    /* =====================================================
+       ASSISTANT PAGE
+       ===================================================== */
 
-    \</div>
+    .assistant-layout {
+        width: 100% !important;
 
+        display: flex !important;
+        flex-direction: column !important;
 
+        gap: 18px !important;
+    }
 
-    \<!-- AURA ORB -->
+    .assistant-visual {
+        width: 100% !important;
+        max-width: 100% !important;
 
-    \<div class="hero-aura">
+        padding: 20px 10px !important;
+    }
 
-        \<div class="aura-ring ring-one">\</div>
-        \<div class="aura-ring ring-two">\</div>
-        \<div class="aura-ring ring-three">\</div>
+    .assistant-visual h2 {
+        font-size: 23px !important;
+    }
 
-        \<div class="aura-orb"
-             id="auraOrb">
+    .assistant-visual p {
+        font-size: 12px !important;
+    }
 
-            \<div class="orb-inner">
-                ✦
-            \</div>
+    .big-aura {
+        transform: scale(0.8);
+        margin: -15px 0 !important;
+    }
 
-        \</div>
+    .big-orb {
+        max-width: 140px !important;
+        max-height: 140px !important;
+    }
 
-        \<div class="voice-wave">
+    .voice-btn {
+        width: 100% !important;
+        max-width: 320px !important;
 
-            \<i>\</i>
-            \<i>\</i>
-            \<i>\</i>
-            \<i>\</i>
-            \<i>\</i>
-            \<i>\</i>
-            \<i>\</i>
+        min-height: 48px;
+    }
 
-        \</div>
 
-        \<p>
-            Tap to speak
-        \</p>
+    /* =====================================================
+       CHAT
+       ===================================================== */
 
-    \</div>
+    .chat-panel {
+        width: 100% !important;
+        max-width: 100% !important;
 
-\</div>
+        min-width: 0 !important;
+    }
 
+    .chat-header {
+        width: 100% !important;
+        padding: 13px !important;
+    }
 
+    .chat-profile {
+        min-width: 0 !important;
+    }
 
+    .chat-profile strong {
+        font-size: 14px !important;
+    }
 
+    .chat-profile span {
+        font-size: 9px !important;
+    }
 
-\<!-- =====================================================
-     STATISTICS
-\===================================================== -->
+    .chat-action {
+        flex-shrink: 0;
+    }
 
-\<div class="stats-grid">
+    .chat-box {
+        width: 100% !important;
 
+        min-height: 280px !important;
+        max-height: 45vh !important;
 
+        overflow-y: auto !important;
+        overflow-x: hidden !important;
+    }
 
-    \<div class="stat-card">
+    .chat-message {
+        max-width: 90% !important;
+    }
 
-        \<div class="stat-icon">
-            📅
-        \</div>
+    .chat-text {
+        max-width: calc(100% - 40px) !important;
 
-        \<div>
+        font-size: 12px !important;
+        line-height: 1.5 !important;
 
-            \<span>Today's Events\</span>
+        overflow-wrap: anywhere;
+        word-break: break-word;
+    }
 
-            \<strong id="todayEvents">
-                0
-            \</strong>
 
-        \</div>
+    /* =====================================================
+       CHAT INPUT
+       ===================================================== */
 
-    \</div>
+    .chat-input-area {
+        width: 100% !important;
 
+        display: flex !important;
+        gap: 6px !important;
 
+        padding: 9px !important;
+    }
 
-    \<div class="stat-card">
+    .chat-mic {
+        width: 42px !important;
+        min-width: 42px !important;
+        height: 42px !important;
+    }
 
-        \<div class="stat-icon">
-            ⏰
-        \</div>
+    #commandInput {
+        width: 100% !important;
+        min-width: 0 !important;
 
-        \<div>
+        font-size: 16px !important;
+    }
 
-            \<span>Upcoming\</span>
+    .send-btn {
+        width: 42px !important;
+        min-width: 42px !important;
+        height: 42px !important;
+    }
 
-            \<strong id="upcomingEvents">
-                0
-            \</strong>
 
-        \</div>
+    /* =====================================================
+       LANGUAGES
+       ===================================================== */
 
-    \</div>
+    .language-row {
+        width: 100% !important;
 
+        display: flex !important;
+        flex-wrap: wrap !important;
 
+        justify-content: center !important;
+        gap: 6px !important;
 
-    \<div class="stat-card">
+        padding: 10px !important;
+    }
 
-        \<div class="stat-icon">
-            🔔
-        \</div>
+    .language-btn {
+        padding: 7px 10px !important;
+        font-size: 10px !important;
+    }
 
-        \<div>
 
-            \<span>Reminders\</span>
+    /* =====================================================
+       MODAL
+       ===================================================== */
 
-            \<strong id="reminderCount">
-                0
-            \</strong>
+    .modal {
+        padding: 10px !important;
+    }
 
-        \</div>
+    .modal-box {
+        width: 100% !important;
+        max-width: 500px !important;
 
-    \</div>
+        max-height: 92vh !important;
 
+        overflow-y: auto !important;
 
+        padding: 18px !important;
+        margin: auto !important;
 
-    \<div class="stat-card">
+        border-radius: 18px !important;
+    }
 
-        \<div class="stat-icon">
-            ✨
-        \</div>
+    .modal-header {
+        padding-right: 25px;
+    }
 
-        \<div>
+    .modal-header h2 {
+        font-size: 20px !important;
+    }
 
-            \<span>Free Time\</span>
+    .modal-header p {
+        font-size: 11px !important;
+    }
 
-            \<strong id="freeTime">
-                \-- hrs
-            \</strong>
+    .form-row {
+        width: 100% !important;
 
-        \</div>
+        display: grid !important;
+        grid-template-columns: 1fr 1fr !important;
 
-    \</div>
+        gap: 10px !important;
+    }
 
-\</div>
+    .form-group {
+        width: 100% !important;
+        min-width: 0 !important;
+    }
 
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+        width: 100% !important;
+        max-width: 100% !important;
 
+        font-size: 16px !important;
+    }
 
+    .modal-actions {
+        width: 100% !important;
 
+        display: grid !important;
+        grid-template-columns: 1fr 1fr !important;
 
-\<!-- =====================================================
-     DASHBOARD PANELS
-\===================================================== -->
+        gap: 8px !important;
+    }
 
-\<div class="dashboard-grid">
+    .modal-actions button {
+        width: 100% !important;
+    }
 
 
+    /* =====================================================
+       NOTIFICATION PANEL
+       ===================================================== */
 
-    \<!-- TODAY'S SCHEDULE -->
+    .notification-panel {
+        width: calc(100% - 20px) !important;
+        max-width: 420px !important;
 
-    \<div class="panel">
+        right: 10px !important;
+        left: auto !important;
+    }
 
-        \<div class="panel-header">
 
-            \<div>
+    /* =====================================================
+       TOAST
+       ===================================================== */
 
-                \<small>
-                    YOUR DAY
-                \</small>
+    .toast {
+        width: calc(100% - 20px) !important;
+        max-width: 420px !important;
 
-                \<h3>
-                    Today's Schedule
-                \</h3>
+        left: 10px !important;
+        right: 10px !important;
 
-            \</div>
+        bottom: 15px !important;
+    }
+}
 
 
+/* =========================================================
+   SMALL MOBILE PHONES
+   ========================================================= */
 
-            \<button class="text-btn"
-                    id="viewScheduleBtn">
+@media (max-width: 480px) {
 
-                View all →
+    .sidebar {
+        padding: 10px !important;
+    }
 
-            \</button>
+    .navigation {
+        gap: 4px !important;
+    }
 
-        \</div>
+    .nav-item {
+        padding: 8px 2px !important;
+        font-size: 8px !important;
+    }
 
+    .nav-item span {
+        font-size: 15px !important;
+    }
 
+    .section {
+        padding: 13px 10px !important;
+    }
 
-        \<div id="todaySchedule"
-             class="events-list">
+    .topbar {
+        padding: 13px 10px !important;
+    }
 
-            \<div class="empty-large">
+    .hero-card {
+        padding: 18px 14px !important;
+    }
 
-                \<div>📅\</div>
+    .hero-content h1 {
+        font-size: 24px !important;
+    }
 
-                \<h4>
-                    No events today
-                \</h4>
+    .stats-grid {
+        grid-template-columns: 1fr 1fr !important;
+        gap: 7px !important;
+    }
 
-                \<p>
-                    Ask AURA to schedule something.
-                \</p>
+    .stat-card {
+        padding: 10px !important;
+    }
 
-            \</div>
+    .stat-card strong {
+        font-size: 18px !important;
+    }
 
-        \</div>
+    .quick-commands {
+        grid-template-columns: 1fr !important;
+    }
 
-    \</div>
+    .calendar-weekdays span {
+        font-size: 8px !important;
+    }
 
+    .calendar-day {
+        padding: 7px 1px !important;
+        font-size: 10px !important;
+    }
 
+    .form-row {
+        grid-template-columns: 1fr !important;
+    }
 
+    .modal-actions {
+        grid-template-columns: 1fr !important;
+    }
 
-
-    \<!-- AURA CARD -->
-
-    \<div class="panel">
-
-        \<div class="panel-header">
-
-            \<div>
-
-                \<small>
-                    AI ASSISTANT
-                \</small>
-
-                \<h3>
-                    AURA says...
-                \</h3>
-
-            \</div>
-
-            \<span class="ai-status">
-                ● Online
-            \</span>
-
-        \</div>
-
-
-
-        \<div class="aura-message">
-
-            \<div class="message-avatar">
-                ✦
-            \</div>
-
-            \<div class="message-bubble">
-
-                \<p id="auraGreeting">
-
-                    Hi! I'm AURA 💜
-
-                    \<br>\<br>
-
-                    I'm your personal AI calendar assistant.
-
-                    \<br>\<br>
-
-                    You can type or speak commands like:
-
-                    \<br>\<br>
-
-                    \<b>
-                        "Schedule meeting tomorrow at 5 PM"
-                    \</b>
-
-                \</p>
-
-            \</div>
-
-        \</div>
-
-
-
-        \<div class="quick-commands">
-
-            \<button class="quick-command"
-                    data-command="What do I have today?">
-
-                📅 Today's schedule
-
-            \</button>
-
-
-
-            \<button class="quick-command"
-                    data-command="Find my free time">
-
-                🕐 Find free time
-
-            \</button>
-
-
-
-            \<button class="quick-command"
-                    data-command="What festivals are coming?">
-
-                🎉 Upcoming festivals
-
-            \</button>
-
-
-
-            \<button class="quick-command"
-                    data-command="Suggest a good time for studying">
-
-                🧠 Smart suggestion
-
-            \</button>
-
-        \</div>
-
-    \</div>
-
-\</div>
-
-\</section>
-
-
-
-
-
-\<!-- =====================================================
-     CALENDAR
-\===================================================== -->
-
-\<section class="section"
-         id="calendar">
-
-    \<div class="section-heading">
-
-        \<div>
-
-            \<small>
-                PLAN YOUR MONTH
-            \</small>
-
-            \<h2>
-                Smart Calendar
-            \</h2>
-
-            \<p>
-                Manage your events and important dates.
-            \</p>
-
-        \</div>
-
-
-
-        \<button class="primary-btn"
-                id="calendarAddBtn">
-
-            ＋ Add Event
-
-        \</button>
-
-    \</div>
-
-
-
-    \<div class="calendar-panel">
-
-
-
-        \<div class="calendar-toolbar">
-
-            \<button id="prevMonth"
-                    class="calendar-arrow">
-
-                ‹
-
-            \</button>
-
-
-
-            \<h3 id="calendarMonth">
-                September 2026
-            \</h3>
-
-
-
-            \<button id="nextMonth"
-                    class="calendar-arrow">
-
-                ›
-
-            \</button>
-
-        \</div>
-
-
-
-        \<div class="calendar-weekdays">
-
-            \<span>Sun\</span>
-            \<span>Mon\</span>
-            \<span>Tue\</span>
-            \<span>Wed\</span>
-            \<span>Thu\</span>
-            \<span>Fri\</span>
-            \<span>Sat\</span>
-
-        \</div>
-
-
-
-        \<div id="calendarDays"
-             class="calendar-days">
-
-        \</div>
-
-    \</div>
-
-\</section>
-
-
-
-
-
-\<!-- =====================================================
-     MY SCHEDULE
-\===================================================== -->
-
-\<section class="section"
-         id="schedule">
-
-    \<div class="section-heading">
-
-        \<div>
-
-            \<small>
-                YOUR PLANS
-            \</small>
-
-            \<h2>
-                My Schedule
-            \</h2>
-
-            \<p>
-                All your events in one place.
-            \</p>
-
-        \</div>
-
-
-
-        \<button class="primary-btn"
-                id="scheduleAddBtn">
-
-            ＋ New Schedule
-
-        \</button>
-
-    \</div>
-
-
-
-    \<div id="eventsContainer"
-         class="all-events">
-
-        \<div class="empty-large">
-
-            \<div>
-                🗓️
-            \</div>
-
-            \<h4>
-                No schedules yet
-            \</h4>
-
-            \<p>
-                Create your first event.
-            \</p>
-
-        \</div>
-
-    \</div>
-
-\</section>
-
-
-
-
-
-\<!-- =====================================================
-     FESTIVALS
-\===================================================== -->
-
-\<section class="section"
-         id="festivals">
-
-    \<div class="section-heading">
-
-        \<div>
-
-            \<small>
-                INDIA • 2026
-            \</small>
-
-            \<h2>
-                Festivals & Important Days
-            \</h2>
-
-            \<p>
-                Never miss an important day.
-            \</p>
-
-        \</div>
-
-    \</div>
-
-
-
-    \<div class="festival-filters">
-
-        \<button class="filter-btn active"
-                data-filter="All">
-
-            All
-
-        \</button>
-
-
-
-        \<button class="filter-btn"
-                data-filter="Festival">
-
-            Festivals
-
-        \</button>
-
-
-
-        \<button class="filter-btn"
-                data-filter="National">
-
-            National
-
-        \</button>
-
-
-
-        \<button class="filter-btn"
-                data-filter="Maharashtra">
-
-            Maharashtra
-
-        \</button>
-
-    \</div>
-
-
-
-    \<div id="festivalGrid"
-         class="festival-grid">
-
-    \</div>
-
-\</section>
-
-
-
-
-
-\<!-- =====================================================
-     AURA AI ASSISTANT
-\===================================================== -->
-
-\<section class="section"
-         id="assistant">
-
-
-
-    \<div class="assistant-layout">
-
-
-
-        \<!-- LEFT -->
-
-        \<div class="assistant-visual">
-
-            \<div class="assistant-status">
-                ● AURA IS READY
-            \</div>
-
-
-
-            \<div class="big-aura">
-
-                \<div class="big-ring ring-a">\</div>
-                \<div class="big-ring ring-b">\</div>
-                \<div class="big-ring ring-c">\</div>
-
-
-
-                \<div class="big-orb"
-                     id="bigAuraOrb">
-
-                    ✦
-
-                \</div>
-
-            \</div>
-
-
-
-            \<h2>
-                Hi, I'm AURA 💜
-            \</h2>
-
-
-
-            \<p>
-                Your personal AI calendar assistant.
-            \</p>
-
-
-
-            \<button class="voice-btn"
-                    id="voiceBtn">
-
-                🎙️
-                \<span>Tap & Speak\</span>
-
-            \</button>
-
-
-
-            \<small>
-                Speak naturally in English,
-                Hindi or Marathi.
-            \</small>
-
-        \</div>
-
-
-
-
-
-        \<!-- RIGHT CHAT -->
-
-        \<div class="chat-panel">
-
-
-
-            \<div class="chat-header">
-
-                \<div class="chat-profile">
-
-                    \<div class="chat-avatar">
-                        ✦
-                    \</div>
-
-                    \<div>
-
-                        \<strong>
-                            AURA
-                        \</strong>
-
-                        \<span>
-                            Female AI Assistant • Online
-                        \</span>
-
-                    \</div>
-
-                \</div>
-
-
-
-                \<button id="clearChat"
-                        class="chat-action">
-
-                    Clear
-
-                \</button>
-
-            \</div>
-
-
-
-
-
-            \<!-- CHAT -->
-
-            \<div id="chatBox"
-                 class="chat-box">
-
-
-
-                \<div class="chat-message aura">
-
-                    \<div class="chat-small-avatar">
-                        ✦
-                    \</div>
-
-                    \<div class="chat-text">
-
-                        Hello! I'm AURA 👋💜
-
-                        \<br>\<br>
-
-                        Tell me what you want to do.
-
-                        \<br>\<br>
-
-                        Try:
-
-                        \<br>
-                        • Schedule an event
-                        \<br>
-                        • Check today's schedule
-                        \<br>
-                        • Find free time
-                        \<br>
-                        • Check festivals
-                        \<br>
-                        • Ask for suggestions
-
-                    \</div>
-
-                \</div>
-
-            \</div>
-
-
-
-
-
-            \<!-- INPUT -->
-
-            \<div class="chat-input-area">
-
-                \<button id="chatMic"
-                        class="chat-mic"
-                        title="Voice input">
-
-                    🎙️
-
-                \</button>
-
-
-
-                \<input
-                    type="text"
-                    id="commandInput"
-                    placeholder="Ask AURA anything..."
-                    autocomplete="off"
-                \>
-
-
-
-                \<button id="sendCommand"
-                        class="send-btn">
-
-                    ➤
-
-                \</button>
-
-            \</div>
-
-
-
-
-
-            \<!-- LANGUAGES -->
-
-            \<div class="language-row">
-
-                \<span>
-                    Language:
-                \</span>
-
-
-
-                \<button class="language-btn active"
-                        data-language="en-IN">
-
-                    English
-
-                \</button>
-
-
-
-                \<button class="language-btn"
-                        data-language="hi-IN">
-
-                    हिंदी
-
-                \</button>
-
-
-
-                \<button class="language-btn"
-                        data-language="mr-IN">
-
-                    मराठी
-
-                \</button>
-
-            \</div>
-
-        \</div>
-
-    \</div>
-
-\</section>
-
-\</main>
-
-\</div>
-
-
-
-
-
-\<!-- =====================================================
-     EVENT MODAL
-\===================================================== -->
-
-\<div class="modal"
-     id="eventModal">
-
-
-
-    \<div class="modal-overlay">\</div>
-
-
-
-    \<div class="modal-box">
-
-
-
-        \<button class="modal-close"
-                id="closeModal">
-
-            ×
-
-        \</button>
-
-
-
-        \<div class="modal-header">
-
-            \<div class="modal-icon">
-                ✦
-            \</div>
-
-            \<div>
-
-                \<small>
-                    AURA CALENDAR
-                \</small>
-
-                \<h2>
-                    Create New Event
-                \</h2>
-
-                \<p>
-                    Add a new event to your calendar.
-                \</p>
-
-            \</div>
-
-        \</div>
-
-
-
-
-
-        \<form id="eventForm">
-
-
-
-            \<!-- TITLE -->
-
-            \<div class="form-group">
-
-                \<label>
-                    Event Title
-                \</label>
-
-                \<input
-                    type="text"
-                    id="eventTitle"
-                    placeholder="e.g. College presentation"
-                    required
-                \>
-
-            \</div>
-
-
-
-
-
-            \<!-- DATE + TIME -->
-
-            \<div class="form-row">
-
-
-
-                \<div class="form-group">
-
-                    \<label>
-                        Date
-                    \</label>
-
-                    \<input
-                        type="date"
-                        id="eventDate"
-                        required
-                    \>
-
-                \</div>
-
-
-
-                \<div class="form-group">
-
-                    \<label>
-                        Time
-                    \</label>
-
-                    \<input
-                        type="time"
-                        id="eventTime"
-                        required
-                    \>
-
-                \</div>
-
-            \</div>
-
-
-
-
-
-            \<!-- REMINDER + PRIORITY -->
-
-            \<div class="form-row">
-
-
-
-                \<div class="form-group">
-
-                    \<label>
-                        Reminder
-                    \</label>
-
-                    \<select id="reminderTime">
-
-                        \<option value="0">
-                            At event time
-                        \</option>
-
-                        \<option value="5">
-                            5 minutes before
-                        \</option>
-
-                        \<option value="10">
-                            10 minutes before
-                        \</option>
-
-                        \<option value="15">
-                            15 minutes before
-                        \</option>
-
-                        \<option value="30" selected>
-                            30 minutes before
-                        \</option>
-
-                        \<option value="60">
-                            1 hour before
-                        \</option>
-
-                        \<option value="120">
-                            2 hours before
-                        \</option>
-
-                    \</select>
-
-                \</div>
-
-
-
-                \<div class="form-group">
-
-                    \<label>
-                        Priority
-                    \</label>
-
-                    \<select id="eventPriority">
-
-                        \<option>
-                            Low
-                        \</option>
-
-                        \<option selected>
-                            Medium
-                        \</option>
-
-                        \<option>
-                            High
-                        \</option>
-
-                        \<option>
-                            Urgent
-                        \</option>
-
-                    \</select>
-
-                \</div>
-
-            \</div>
-
-
-
-
-
-            \<!-- CATEGORY -->
-
-            \<div class="form-group">
-
-                \<label>
-                    Category
-                \</label>
-
-                \<select id="eventCategory">
-
-                    \<option>
-                        Personal
-                    \</option>
-
-                    \<option>
-                        Study
-                    \</option>
-
-                    \<option>
-                        College
-                    \</option>
-
-                    \<option>
-                        Work
-                    \</option>
-
-                    \<option>
-                        Meeting
-                    \</option>
-
-                    \<option>
-                        Birthday
-                    \</option>
-
-                    \<option>
-                        Festival
-                    \</option>
-
-                    \<option>
-                        Holiday
-                    \</option>
-
-                    \<option>
-                        Other
-                    \</option>
-
-                \</select>
-
-            \</div>
-
-
-
-
-
-            \<!-- DESCRIPTION -->
-
-            \<div class="form-group">
-
-                \<label>
-                    Description
-                \</label>
-
-                \<textarea
-                    id="eventDescription"
-                    rows="4"
-                    placeholder="Add notes about this event..."
-                \>\</textarea>
-
-            \</div>
-
-
-
-
-
-            \<div class="voice-tip">
-
-                💡
-                You can also say:
-
-                \<b>
-                    "Schedule this tomorrow at 5 PM"
-                \</b>
-
-            \</div>
-
-
-
-
-
-            \<!-- BUTTONS -->
-
-            \<div class="modal-actions">
-
-                \<button
-                    type="button"
-                    class="secondary-btn"
-                    id="cancelEvent">
-
-                    Cancel
-
-                \</button>
-
-
-
-                \<button
-                    type="submit"
-                    class="primary-btn">
-
-                    ✦ Create Event
-
-                \</button>
-
-            \</div>
-
-        \</form>
-
-    \</div>
-
-\</div>
-
-
-
-
-
-\<!-- =====================================================
-     NOTIFICATION PANEL
-\===================================================== -->
-
-\<div class="notification-panel"
-     id="notificationPanel">
-
-
-
-    \<div class="notification-header">
-
-        \<h3>
-            Notifications
-        \</h3>
-
-
-
-        \<button id="closeNotifications">
-            ×
-        \</button>
-
-    \</div>
-
-
-
-    \<div class="notification-list"
-         id="notificationList">
-
-        \<div class="empty-notification">
-
-            🔔
-
-            \<p>
-                No new notifications
-            \</p>
-
-        \</div>
-
-    \</div>
-
-\</div>
-
-
-
-
-
-\<!-- =====================================================
-     TOAST MESSAGE
-\===================================================== -->
-
-\<div class="toast"
-     id="toast">
-
-    \<span id="toastIcon">
-        ✓
-    \</span>
-
-
-
-    \<div>
-
-        \<strong id="toastTitle">
-            Success
-        \</strong>
-
-        \<p id="toastMessage">
-            Done!
-        \</p>
-
-    \</div>
-
-\</div>
-
-
-
-
-
-\<!-- =====================================================
-     JAVASCRIPT
-\===================================================== -->
-
-\<script src="{{ url\_for('static', filename='script.js') }}?v=10">\</script>
-
-\</body>
-\</html>
+    .chat-box {
+        min-height: 250px !important;
+    }
+}
