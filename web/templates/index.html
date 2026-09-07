@@ -1,13 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>AURA | AI Smart Calendar</title>
 
-   <link rel="stylesheet"
-      href="{{ url_for('static', filename='style.css') }}?v=11">
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}?v=11">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
 
@@ -22,9 +23,11 @@
 ===================================================== -->
 
 <div class="background">
+
     <div class="gradient-orb orb-one"></div>
     <div class="gradient-orb orb-two"></div>
     <div class="gradient-orb orb-three"></div>
+
 </div>
 
 
@@ -122,7 +125,6 @@
 </aside>
 
 
-
 <!-- =====================================================
      MAIN
 ===================================================== -->
@@ -191,7 +193,6 @@
 </header>
 
 
-
 <!-- =====================================================
      DASHBOARD
 ===================================================== -->
@@ -200,11 +201,15 @@
          id="dashboard">
 
 
-<!-- HERO -->
+<!-- =====================================================
+     HERO
+===================================================== -->
 
 <div class="hero-card">
 
+
     <div class="hero-content">
+
 
         <div class="hero-label">
 
@@ -233,6 +238,7 @@
 
         <div class="hero-actions">
 
+
             <button class="primary-btn"
                     id="openAssistantBtn">
 
@@ -248,27 +254,39 @@
 
             </button>
 
+
         </div>
+
 
     </div>
 
 
-    <!-- AURA ORB -->
+    <!-- =================================================
+         AURA ORB
+    ================================================= -->
 
-    <div class="hero-aura">
+    <div class="hero-aura"
+         id="heroAura">
+
 
         <div class="aura-ring ring-one"></div>
+
         <div class="aura-ring ring-two"></div>
+
         <div class="aura-ring ring-three"></div>
+
 
         <div class="aura-orb"
              id="auraOrb">
+
 
             <div class="orb-inner">
                 ✦
             </div>
 
+
         </div>
+
 
         <div class="voice-wave">
 
@@ -282,14 +300,18 @@
 
         </div>
 
-        <p>
-            Tap to speak
-        </p>
+
+        <!-- CENTER TEXT -->
+
+        <div class="tap-speak-text">
+            🎙️ Tap to speak
+        </div>
+
 
     </div>
 
-</div>
 
+</div>
 
 
 <!-- =====================================================
@@ -301,13 +323,17 @@
 
     <div class="stat-card">
 
+
         <div class="stat-icon">
             📅
         </div>
 
+
         <div>
 
-            <span>Today's Events</span>
+            <span>
+                Today's Events
+            </span>
 
             <strong id="todayEvents">
                 0
@@ -315,18 +341,23 @@
 
         </div>
 
+
     </div>
 
 
     <div class="stat-card">
 
+
         <div class="stat-icon">
             ⏰
         </div>
 
+
         <div>
 
-            <span>Upcoming</span>
+            <span>
+                Upcoming
+            </span>
 
             <strong id="upcomingEvents">
                 0
@@ -334,18 +365,23 @@
 
         </div>
 
+
     </div>
 
 
     <div class="stat-card">
 
+
         <div class="stat-icon">
             🔔
         </div>
 
+
         <div>
 
-            <span>Reminders</span>
+            <span>
+                Reminders
+            </span>
 
             <strong id="reminderCount">
                 0
@@ -353,18 +389,23 @@
 
         </div>
 
+
     </div>
 
 
     <div class="stat-card">
 
+
         <div class="stat-icon">
             ✨
         </div>
 
+
         <div>
 
-            <span>Free Time</span>
+            <span>
+                Free Time
+            </span>
 
             <strong id="freeTime">
                 -- hrs
@@ -372,10 +413,11 @@
 
         </div>
 
+
     </div>
 
-</div>
 
+</div>
 
 
 <!-- =====================================================
@@ -389,7 +431,9 @@
 
     <div class="panel">
 
+
         <div class="panel-header">
+
 
             <div>
 
@@ -411,15 +455,19 @@
 
             </button>
 
+
         </div>
 
 
         <div id="todaySchedule"
              class="events-list">
 
+
             <div class="empty-large">
 
-                <div>📅</div>
+                <div>
+                    📅
+                </div>
 
                 <h4>
                     No events today
@@ -431,17 +479,20 @@
 
             </div>
 
+
         </div>
 
-    </div>
 
+    </div>
 
 
     <!-- AURA CARD -->
 
     <div class="panel">
 
+
         <div class="panel-header">
+
 
             <div>
 
@@ -455,20 +506,25 @@
 
             </div>
 
+
             <span class="ai-status">
                 ● Online
             </span>
+
 
         </div>
 
 
         <div class="aura-message">
 
+
             <div class="message-avatar">
                 ✦
             </div>
 
+
             <div class="message-bubble">
+
 
                 <p id="auraGreeting">
 
@@ -490,12 +546,15 @@
 
                 </p>
 
+
             </div>
+
 
         </div>
 
 
         <div class="quick-commands">
+
 
             <button class="quick-command"
                     data-command="What do I have today?">
@@ -528,14 +587,16 @@
 
             </button>
 
+
         </div>
 
+
     </div>
+
 
 </div>
 
 </section>
-
 
 
 <!-- =====================================================
@@ -545,7 +606,9 @@
 <section class="section"
          id="calendar">
 
+
     <div class="section-heading">
+
 
         <div>
 
@@ -571,6 +634,7 @@
 
         </button>
 
+
     </div>
 
 
@@ -578,6 +642,7 @@
 
 
         <div class="calendar-toolbar">
+
 
             <button id="prevMonth"
                     class="calendar-arrow">
@@ -599,6 +664,7 @@
 
             </button>
 
+
         </div>
 
 
@@ -617,13 +683,13 @@
 
         <div id="calendarDays"
              class="calendar-days">
-
         </div>
+
 
     </div>
 
-</section>
 
+</section>
 
 
 <!-- =====================================================
@@ -633,7 +699,9 @@
 <section class="section"
          id="schedule">
 
+
     <div class="section-heading">
+
 
         <div>
 
@@ -659,32 +727,39 @@
 
         </button>
 
+
     </div>
 
 
     <div id="eventsContainer"
          class="all-events">
 
+
         <div class="empty-large">
+
 
             <div>
                 🗓️
             </div>
 
+
             <h4>
                 No schedules yet
             </h4>
+
 
             <p>
                 Create your first event.
             </p>
 
+
         </div>
+
 
     </div>
 
-</section>
 
+</section>
 
 
 <!-- =====================================================
@@ -694,7 +769,9 @@
 <section class="section"
          id="festivals">
 
+
     <div class="section-heading">
+
 
         <div>
 
@@ -702,20 +779,25 @@
                 INDIA • 2026
             </small>
 
+
             <h2>
                 Festivals & Important Days
             </h2>
+
 
             <p>
                 Never miss an important day.
             </p>
 
+
         </div>
+
 
     </div>
 
 
     <div class="festival-filters">
+
 
         <button class="filter-btn active"
                 data-filter="All">
@@ -748,6 +830,7 @@
 
         </button>
 
+
     </div>
 
 
@@ -756,8 +839,8 @@
 
     </div>
 
-</section>
 
+</section>
 
 
 <!-- =====================================================
@@ -775,6 +858,7 @@
 
         <div class="assistant-visual">
 
+
             <div class="assistant-status">
                 ● AURA IS READY
             </div>
@@ -782,8 +866,11 @@
 
             <div class="big-aura">
 
+
                 <div class="big-ring ring-a"></div>
+
                 <div class="big-ring ring-b"></div>
+
                 <div class="big-ring ring-c"></div>
 
 
@@ -793,6 +880,7 @@
                     ✦
 
                 </div>
+
 
             </div>
 
@@ -811,7 +899,10 @@
                     id="voiceBtn">
 
                 🎙️
-                <span>Tap & Speak</span>
+
+                <span>
+                    Tap & Speak
+                </span>
 
             </button>
 
@@ -821,8 +912,8 @@
                 Hindi or Marathi.
             </small>
 
-        </div>
 
+        </div>
 
 
         <!-- RIGHT CHAT -->
@@ -832,11 +923,14 @@
 
             <div class="chat-header">
 
+
                 <div class="chat-profile">
+
 
                     <div class="chat-avatar">
                         ✦
                     </div>
+
 
                     <div>
 
@@ -850,6 +944,7 @@
 
                     </div>
 
+
                 </div>
 
 
@@ -860,8 +955,8 @@
 
                 </button>
 
-            </div>
 
+            </div>
 
 
             <!-- CHAT -->
@@ -872,11 +967,14 @@
 
                 <div class="chat-message aura">
 
+
                     <div class="chat-small-avatar">
                         ✦
                     </div>
 
+
                     <div class="chat-text">
+
 
                         Hello! I'm AURA 👋💜
 
@@ -889,27 +987,39 @@
                         Try:
 
                         <br>
+
                         • Schedule an event
+
                         <br>
+
                         • Check today's schedule
+
                         <br>
+
                         • Find free time
+
                         <br>
+
                         • Check festivals
+
                         <br>
+
                         • Ask for suggestions
+
 
                     </div>
 
+
                 </div>
 
-            </div>
 
+            </div>
 
 
             <!-- INPUT -->
 
             <div class="chat-input-area">
+
 
                 <button id="chatMic"
                         class="chat-mic"
@@ -935,13 +1045,14 @@
 
                 </button>
 
-            </div>
 
+            </div>
 
 
             <!-- LANGUAGES -->
 
             <div class="language-row">
+
 
                 <span>
                     Language:
@@ -971,18 +1082,22 @@
 
                 </button>
 
+
             </div>
+
 
         </div>
 
+
     </div>
 
+
 </section>
+
 
 </main>
 
 </div>
-
 
 
 <!-- =====================================================
@@ -1009,9 +1124,11 @@
 
         <div class="modal-header">
 
+
             <div class="modal-icon">
                 ✦
             </div>
+
 
             <div>
 
@@ -1029,8 +1146,8 @@
 
             </div>
 
-        </div>
 
+        </div>
 
 
         <form id="eventForm">
@@ -1040,9 +1157,11 @@
 
             <div class="form-group">
 
+
                 <label>
                     Event Title
                 </label>
+
 
                 <input
                     type="text"
@@ -1051,8 +1170,8 @@
                     required
                 >
 
-            </div>
 
+            </div>
 
 
             <!-- DATE + TIME -->
@@ -1062,9 +1181,11 @@
 
                 <div class="form-group">
 
+
                     <label>
                         Date
                     </label>
+
 
                     <input
                         type="date"
@@ -1072,14 +1193,17 @@
                         required
                     >
 
+
                 </div>
 
 
                 <div class="form-group">
 
+
                     <label>
                         Time
                     </label>
+
 
                     <input
                         type="time"
@@ -1087,10 +1211,11 @@
                         required
                     >
 
+
                 </div>
 
-            </div>
 
+            </div>
 
 
             <!-- REMINDER + PRIORITY -->
@@ -1100,136 +1225,170 @@
 
                 <div class="form-group">
 
+
                     <label>
                         Reminder
                     </label>
 
+
                     <select id="reminderTime">
+
 
                         <option value="0">
                             At event time
                         </option>
 
+
                         <option value="5">
                             5 minutes before
                         </option>
+
 
                         <option value="10">
                             10 minutes before
                         </option>
 
+
                         <option value="15">
                             15 minutes before
                         </option>
 
-                        <option value="30" selected>
+
+                        <option value="30"
+                                selected>
                             30 minutes before
                         </option>
+
 
                         <option value="60">
                             1 hour before
                         </option>
 
+
                         <option value="120">
                             2 hours before
                         </option>
 
+
                     </select>
+
 
                 </div>
 
 
                 <div class="form-group">
 
+
                     <label>
                         Priority
                     </label>
 
+
                     <select id="eventPriority">
+
 
                         <option>
                             Low
                         </option>
 
+
                         <option selected>
                             Medium
                         </option>
+
 
                         <option>
                             High
                         </option>
 
+
                         <option>
                             Urgent
                         </option>
 
+
                     </select>
+
 
                 </div>
 
-            </div>
 
+            </div>
 
 
             <!-- CATEGORY -->
 
             <div class="form-group">
 
+
                 <label>
                     Category
                 </label>
 
+
                 <select id="eventCategory">
+
 
                     <option>
                         Personal
                     </option>
 
+
                     <option>
                         Study
                     </option>
+
 
                     <option>
                         College
                     </option>
 
+
                     <option>
                         Work
                     </option>
+
 
                     <option>
                         Meeting
                     </option>
 
+
                     <option>
                         Birthday
                     </option>
+
 
                     <option>
                         Festival
                     </option>
 
+
                     <option>
                         Holiday
                     </option>
+
 
                     <option>
                         Other
                     </option>
 
+
                 </select>
 
-            </div>
 
+            </div>
 
 
             <!-- DESCRIPTION -->
 
             <div class="form-group">
 
+
                 <label>
                     Description
                 </label>
+
 
                 <textarea
                     id="eventDescription"
@@ -1237,26 +1396,28 @@
                     placeholder="Add notes about this event..."
                 ></textarea>
 
-            </div>
 
+            </div>
 
 
             <div class="voice-tip">
 
-                💡
-                You can also say:
+
+                💡 You can also say:
+
 
                 <b>
                     "Schedule this tomorrow at 5 PM"
                 </b>
 
-            </div>
 
+            </div>
 
 
             <!-- BUTTONS -->
 
             <div class="modal-actions">
+
 
                 <button
                     type="button"
@@ -1276,14 +1437,17 @@
 
                 </button>
 
+
             </div>
+
 
         </form>
 
+
     </div>
 
-</div>
 
+</div>
 
 
 <!-- =====================================================
@@ -1296,6 +1460,7 @@
 
     <div class="notification-header">
 
+
         <h3>
             Notifications
         </h3>
@@ -1305,26 +1470,32 @@
             ×
         </button>
 
+
     </div>
 
 
     <div class="notification-list"
          id="notificationList">
 
+
         <div class="empty-notification">
 
+
             🔔
+
 
             <p>
                 No new notifications
             </p>
 
+
         </div>
+
 
     </div>
 
-</div>
 
+</div>
 
 
 <!-- =====================================================
@@ -1334,6 +1505,7 @@
 <div class="toast"
      id="toast">
 
+
     <span id="toastIcon">
         ✓
     </span>
@@ -1341,25 +1513,30 @@
 
     <div>
 
+
         <strong id="toastTitle">
             Success
         </strong>
+
 
         <p id="toastMessage">
             Done!
         </p>
 
+
     </div>
 
-</div>
 
+</div>
 
 
 <!-- =====================================================
      JAVASCRIPT
 ===================================================== -->
 
-<script src="{{ url_for('static', filename='script.js') }}?v=10"></script>
+<script src="{{ url_for('static', filename='script.js') }}?v=11"></script>
+
 
 </body>
+
 </html>
