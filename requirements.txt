@@ -3,3 +3,4 @@ pyttsx3==2.99
 SpeechRecognition==3.14.3
 plyer==2.1.0
 dateparser==1.2.2
+gunicorn
