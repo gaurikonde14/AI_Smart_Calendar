@@ -1,2174 +1,1487 @@
-/* =========================================================
-   AURA AI SMART CALENDAR
-   COMPLETE RESPONSIVE CSS
-========================================================= */
-
-:root {
-    --bg: #080b16;
-    --bg2: #0d1222;
-    --card: rgba(18, 24, 43, 0.88);
-    --card2: rgba(25, 32, 55, 0.95);
-
-    --text: #f5f7ff;
-    --muted: #9ca6c0;
-
-    --primary: #7c5cff;
-    --secondary: #00d4ff;
-    --pink: #ff4fd8;
-    --green: #36e29b;
-    --orange: #ffb347;
-    --red: #ff5c7a;
-
-    --border: rgba(255,255,255,0.09);
-
-    --shadow:
-        0 20px 60px rgba(0,0,0,0.35);
-
-    --radius: 20px;
-}
-
-
-/* =========================================================
-   RESET
-========================================================= */
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+\<!DOCTYPE html>
+\<html lang="en">
+\<head>
+    \<meta charset="UTF-8">
+    \<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-html {
-    scroll-behavior: smooth;
-    -webkit-text-size-adjust: 100%;
-}
+    \<title>AURA | AI Smart Calendar\</title>
 
-body {
-    font-family:
-        Inter,
-        "Segoe UI",
-        Arial,
-        sans-serif;
+    \<link rel="stylesheet"
+          href="{{ url\_for('static', filename='style.css') }}">
 
-    background:
-        radial-gradient(
-            circle at 10% 10%,
-            rgba(124,92,255,0.15),
-            transparent 30%
-        ),
-        radial-gradient(
-            circle at 90% 20%,
-            rgba(0,212,255,0.10),
-            transparent 30%
-        ),
-        var(--bg);
+    \<link rel="preconnect" href="[https://fonts.googleapis.com](https://fonts.googleapis.com)">
 
-    color: var(--text);
+    \<link href="[https://fonts.googleapis.com/css2?family=Inter\:wght@400;500;600;700;800&family=Orbitron\:wght@500;700;800&display=swap](https://fonts.googleapis.com/css2?family=Inter\:wght@400;500;600;700;800\&family=Orbitron\:wght@500;700;800\&display=swap)"
+          rel="stylesheet">
+\</head>
 
-    min-height: 100vh;
+\<body>
 
-    overflow-x: hidden;
-}
+\<!-- =====================================================
+     BACKGROUND
+\===================================================== -->
 
-button,
-input,
-select,
-textarea {
-    font: inherit;
-}
+\<div class="background">
+    \<div class="gradient-orb orb-one">\</div>
+    \<div class="gradient-orb orb-two">\</div>
+    \<div class="gradient-orb orb-three">\</div>
+\</div>
 
-button {
-    cursor: pointer;
-}
 
-a {
-    text-decoration: none;
-    color: inherit;
-}
 
-img {
-    max-width: 100%;
-}
+\<!-- =====================================================
+     MAIN APP
+\===================================================== -->
 
+\<div class="app">
 
-/* =========================================================
-   MAIN APP
-========================================================= */
 
-.app {
-    min-height: 100vh;
-    display: flex;
-}
 
+\<!-- =====================================================
+     SIDEBAR
+\===================================================== -->
 
-/* =========================================================
-   SIDEBAR
-========================================================= */
+\<aside class="sidebar">
 
-.sidebar {
-    position: fixed;
+    \<div class="brand">
 
-    top: 0;
-    left: 0;
-    bottom: 0;
+        \<div class="brand-orb">
+            ✦
+        \</div>
 
-    width: 250px;
+        \<div>
+            \<h1>AURA\</h1>
+            \<p>AI Smart Calendar\</p>
+        \</div>
 
-    padding: 25px 16px;
+    \</div>
 
-    background:
-        linear-gradient(
-            180deg,
-            rgba(16,21,39,0.97),
-            rgba(9,12,25,0.98)
-        );
 
-    border-right: 1px solid var(--border);
 
-    display: flex;
-    flex-direction: column;
+    \<nav class="navigation">
 
-    z-index: 1000;
+        \<button class="nav-item active"
+                data-section="dashboard">
 
-    backdrop-filter: blur(20px);
-}
+            \<span>⌂\</span>
+            Dashboard
 
+        \</button>
 
-/* =========================================================
-   BRAND
-========================================================= */
 
-.brand {
-    display: flex;
-    align-items: center;
 
-    gap: 12px;
+        \<button class="nav-item"
+                data-section="calendar">
 
-    padding: 5px 10px 25px;
-}
+            \<span>▣\</span>
+            Calendar
 
-.brand-orb {
-    width: 48px;
-    height: 48px;
+        \</button>
 
-    border-radius: 15px;
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
 
-    font-size: 25px;
+        \<button class="nav-item"
+                data-section="schedule">
 
-    background:
-        linear-gradient(
-            135deg,
-            var(--primary),
-            var(--secondary)
-        );
+            \<span>◷\</span>
+            My Schedule
 
-    box-shadow:
-        0 0 30px rgba(124,92,255,0.45);
-}
+        \</button>
 
-.brand h1 {
-    font-size: 20px;
-    font-weight: 800;
-}
 
-.brand p {
-    font-size: 10px;
-    color: var(--muted);
 
-    margin-top: 2px;
+        \<button class="nav-item"
+                data-section="festivals">
 
-    letter-spacing: 1px;
-}
+            \<span>✦\</span>
+            Festivals
 
+        \</button>
 
-/* =========================================================
-   NAVIGATION
-========================================================= */
 
-.navigation {
-    display: flex;
-    flex-direction: column;
 
-    gap: 7px;
+        \<button class="nav-item"
+                data-section="assistant">
 
-    flex: 1;
-}
+            \<span>♙\</span>
+            Ask AURA
 
-.nav-item {
-    width: 100%;
+        \</button>
 
-    border: none;
-    background: transparent;
+    \</nav>
 
-    color: var(--muted);
 
-    padding: 13px 14px;
 
-    border-radius: 13px;
+    \<div class="sidebar-assistant">
 
-    display: flex;
-    align-items: center;
+        \<div class="mini-orb">
+            ✦
+        \</div>
 
-    gap: 12px;
+        \<div>
+            \<strong>AURA\</strong>
+            \<p>Always ready to help\</p>
+        \</div>
 
-    text-align: left;
+        \<span class="online-dot">\</span>
 
-    transition: 0.25s;
-}
+    \</div>
 
-.nav-item span {
-    width: 24px;
+\</aside>
 
-    font-size: 18px;
 
-    display: inline-flex;
-    justify-content: center;
-}
 
-.nav-item:hover {
-    color: white;
 
-    background:
-        rgba(124,92,255,0.12);
 
-    transform: translateX(3px);
-}
+\<!-- =====================================================
+     MAIN
+\===================================================== -->
 
-.nav-item.active {
-    color: white;
+\<main class="main">
 
-    background:
-        linear-gradient(
-            90deg,
-            rgba(124,92,255,0.30),
-            rgba(0,212,255,0.08)
-        );
 
-    border: 1px solid
-        rgba(124,92,255,0.25);
 
-    box-shadow:
-        0 8px 25px
-        rgba(124,92,255,0.12);
-}
+\<!-- =====================================================
+     TOP BAR
+\===================================================== -->
 
+\<header class="topbar">
 
-/* =========================================================
-   SIDEBAR ASSISTANT
-========================================================= */
+    \<div>
 
-.sidebar-assistant {
-    margin-top: auto;
+        \<p class="welcome-text">
+            Welcome back ✨
+        \</p>
 
-    padding: 15px;
+        \<h2 id="todayHeading">
+            Your smart day starts here
+        \</h2>
 
-    border-radius: 18px;
+    \</div>
 
-    background:
-        linear-gradient(
-            135deg,
-            rgba(124,92,255,0.15),
-            rgba(0,212,255,0.08)
-        );
 
-    border: 1px solid var(--border);
 
-    text-align: center;
-}
+    \<div class="top-actions">
 
-.sidebar-assistant .mini-orb {
-    width: 45px;
-    height: 45px;
+        \<div class="live-clock">
 
-    margin: 0 auto 10px;
+            \<span>◷\</span>
 
-    border-radius: 50%;
+            \<div>
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
+                \<strong id="liveTime">
+                    \--:--
+                \</strong>
 
-    background:
-        radial-gradient(
-            circle,
-            var(--secondary),
-            var(--primary)
-        );
+                \<small id="liveDate">
+                    Loading...
+                \</small>
 
-    box-shadow:
-        0 0 25px rgba(0,212,255,0.35);
-}
+            \</div>
 
-.sidebar-assistant strong {
-    display: block;
-    font-size: 13px;
-}
+        \</div>
 
-.sidebar-assistant small {
-    color: var(--muted);
-    font-size: 10px;
-}
 
 
-/* =========================================================
-   MAIN
-========================================================= */
+        \<button class="icon-button"
+                id="notificationBtn">
 
-.main {
-    margin-left: 250px;
+            🔔
 
-    width: calc(100% - 250px);
+            \<span class="notification-badge">
+                0
+            \</span>
 
-    min-height: 100vh;
+        \</button>
 
-    padding: 28px 35px 60px;
-}
 
 
-/* =========================================================
-   TOPBAR
-========================================================= */
+        \<button class="avatar-button">
+            G
+        \</button>
 
-.topbar {
-    display: flex;
+    \</div>
 
-    justify-content: space-between;
-    align-items: center;
+\</header>
 
-    margin-bottom: 25px;
-}
 
-.welcome-text {
-    color: var(--muted);
 
-    font-size: 12px;
 
-    margin-bottom: 4px;
-}
 
-.topbar h2 {
-    font-size: 25px;
-}
+\<!-- =====================================================
+     DASHBOARD
+\===================================================== -->
 
-.top-actions {
-    display: flex;
-    align-items: center;
+\<section class="section active"
+         id="dashboard">
 
-    gap: 10px;
-}
 
-.live-clock {
-    color: var(--muted);
 
-    font-size: 12px;
+\<!-- HERO -->
 
-    padding: 9px 13px;
+\<div class="hero-card">
 
-    background:
-        rgba(255,255,255,0.04);
+    \<div class="hero-content">
 
-    border:
-        1px solid var(--border);
+        \<div class="hero-label">
 
-    border-radius: 12px;
-}
+            \<span class="status-dot">\</span>
 
-.icon-button,
-.avatar-button {
-    width: 42px;
-    height: 42px;
+            AURA IS ONLINE
 
-    border: 1px solid var(--border);
+        \</div>
 
-    border-radius: 13px;
 
-    background:
-        rgba(255,255,255,0.05);
 
-    color: white;
+        \<h1>
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
+            Your day,
+            \<span>intelligently organized.\</span>
 
-.avatar-button {
-    background:
-        linear-gradient(
-            135deg,
-            var(--primary),
-            var(--pink)
-        );
-}
+        \</h1>
 
 
-/* =========================================================
-   HERO
-========================================================= */
 
-.hero-card {
-    position: relative;
+        \<p>
 
-    overflow: hidden;
+            Talk to AURA, create events, manage reminders,
+            check festivals and organize your entire day.
 
-    min-height: 280px;
+        \</p>
 
-    padding: 35px;
 
-    border-radius: 28px;
 
-    background:
-        linear-gradient(
-            135deg,
-            rgba(124,92,255,0.18),
-            rgba(0,212,255,0.08)
-        );
+        \<div class="hero-actions">
 
-    border: 1px solid var(--border);
+            \<button class="primary-btn"
+                    id="openAssistantBtn">
 
-    box-shadow: var(--shadow);
+                🎙️ Talk to AURA
 
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+            \</button>
 
-    gap: 30px;
-}
 
-.hero-content {
-    position: relative;
-    z-index: 2;
 
-    max-width: 650px;
-}
+            \<button class="secondary-btn"
+                    id="createEventBtn">
 
-.hero-content .tag {
-    display: inline-block;
+                ＋ Create Event
 
-    padding: 7px 12px;
+            \</button>
 
-    border-radius: 20px;
+        \</div>
 
-    background:
-        rgba(124,92,255,0.15);
+    \</div>
 
-    color:
-        #b9aaff;
 
-    font-size: 10px;
 
-    margin-bottom: 15px;
-}
+    \<!-- AURA ORB -->
 
-.hero-content h1 {
-    font-size: clamp(34px, 5vw, 58px);
+    \<div class="hero-aura">
 
-    line-height: 1.05;
+        \<div class="aura-ring ring-one">\</div>
+        \<div class="aura-ring ring-two">\</div>
+        \<div class="aura-ring ring-three">\</div>
 
-    margin-bottom: 14px;
-}
+        \<div class="aura-orb"
+             id="auraOrb">
 
-.hero-content h1 span {
-    background:
-        linear-gradient(
-            90deg,
-            var(--primary),
-            var(--secondary),
-            var(--pink)
-        );
+            \<div class="orb-inner">
+                ✦
+            \</div>
 
-    -webkit-background-clip: text;
-    background-clip: text;
+        \</div>
 
-    color: transparent;
-}
+        \<div class="voice-wave">
 
-.hero-content p {
-    color: var(--muted);
+            \<i>\</i>
+            \<i>\</i>
+            \<i>\</i>
+            \<i>\</i>
+            \<i>\</i>
+            \<i>\</i>
+            \<i>\</i>
 
-    line-height: 1.7;
+        \</div>
 
-    max-width: 560px;
+        \<p>
+            Tap to speak
+        \</p>
 
-    font-size: 14px;
-}
+    \</div>
 
-.hero-actions {
-    display: flex;
+\</div>
 
-    gap: 10px;
 
-    margin-top: 25px;
-}
 
-.primary-btn,
-.secondary-btn {
-    border: none;
 
-    padding: 12px 18px;
 
-    border-radius: 13px;
+\<!-- =====================================================
+     STATISTICS
+\===================================================== -->
 
-    font-weight: 700;
+\<div class="stats-grid">
 
-    transition: 0.25s;
-}
 
-.primary-btn {
-    color: white;
 
-    background:
-        linear-gradient(
-            135deg,
-            var(--primary),
-            #5f8cff
-        );
+    \<div class="stat-card">
 
-    box-shadow:
-        0 10px 30px
-        rgba(124,92,255,0.25);
-}
+        \<div class="stat-icon">
+            📅
+        \</div>
 
-.secondary-btn {
-    color: white;
+        \<div>
 
-    background:
-        rgba(255,255,255,0.06);
+            \<span>Today's Events\</span>
 
-    border:
-        1px solid var(--border);
-}
+            \<strong id="todayEvents">
+                0
+            \</strong>
 
-.primary-btn:hover,
-.secondary-btn:hover {
-    transform: translateY(-2px);
-}
+        \</div>
 
+    \</div>
 
-/* =========================================================
-   HERO AURA
-========================================================= */
 
-.hero-aura {
-    width: 250px;
-    height: 250px;
 
-    flex-shrink: 0;
+    \<div class="stat-card">
 
-    border-radius: 50%;
+        \<div class="stat-icon">
+            ⏰
+        \</div>
 
-    background:
-        radial-gradient(
-            circle,
-            rgba(255,255,255,0.9) 0%,
-            var(--secondary) 8%,
-            var(--primary) 38%,
-            rgba(124,92,255,0.15) 68%,
-            transparent 72%
-        );
+        \<div>
 
-    box-shadow:
-        0 0 70px
-        rgba(124,92,255,0.4);
+            \<span>Upcoming\</span>
 
-    animation: auraFloat 4s ease-in-out infinite;
-}
+            \<strong id="upcomingEvents">
+                0
+            \</strong>
 
-@keyframes auraFloat {
-    0%,100% {
-        transform: translateY(0) scale(1);
-    }
+        \</div>
 
-    50% {
-        transform: translateY(-10px) scale(1.04);
-    }
-}
+    \</div>
 
 
-/* =========================================================
-   STATS
-========================================================= */
 
-.stats-grid {
-    display: grid;
+    \<div class="stat-card">
 
-    grid-template-columns:
-        repeat(4, 1fr);
+        \<div class="stat-icon">
+            🔔
+        \</div>
 
-    gap: 14px;
+        \<div>
 
-    margin: 20px 0;
-}
+            \<span>Reminders\</span>
 
-.stat-card {
-    padding: 18px;
+            \<strong id="reminderCount">
+                0
+            \</strong>
 
-    border-radius: 18px;
+        \</div>
 
-    background: var(--card);
+    \</div>
 
-    border:
-        1px solid var(--border);
 
-    display: flex;
 
-    align-items: center;
+    \<div class="stat-card">
 
-    gap: 13px;
-}
+        \<div class="stat-icon">
+            ✨
+        \</div>
 
-.stat-icon {
-    width: 45px;
-    height: 45px;
+        \<div>
 
-    border-radius: 13px;
+            \<span>Free Time\</span>
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
+            \<strong id="freeTime">
+                \-- hrs
+            \</strong>
 
-    background:
-        rgba(124,92,255,0.15);
+        \</div>
 
-    font-size: 20px;
-}
+    \</div>
 
-.stat-card span {
-    display: block;
+\</div>
 
-    color: var(--muted);
 
-    font-size: 10px;
 
-    margin-bottom: 3px;
-}
 
-.stat-card strong {
-    font-size: 25px;
-}
 
+\<!-- =====================================================
+     DASHBOARD PANELS
+\===================================================== -->
 
-/* =========================================================
-   DASHBOARD GRID
-========================================================= */
+\<div class="dashboard-grid">
 
-.dashboard-grid {
-    display: grid;
 
-    grid-template-columns:
-        1.4fr 1fr;
 
-    gap: 18px;
+    \<!-- TODAY'S SCHEDULE -->
 
-    margin-bottom: 30px;
-}
+    \<div class="panel">
 
-.panel {
-    background: var(--card);
+        \<div class="panel-header">
 
-    border:
-        1px solid var(--border);
+            \<div>
 
-    border-radius: var(--radius);
+                \<small>
+                    YOUR DAY
+                \</small>
 
-    padding: 20px;
+                \<h3>
+                    Today's Schedule
+                \</h3>
 
-    box-shadow:
-        0 15px 40px
-        rgba(0,0,0,0.15);
-}
+            \</div>
 
-.panel-header {
-    display: flex;
 
-    justify-content: space-between;
 
-    align-items: center;
+            \<button class="text-btn"
+                    id="viewScheduleBtn">
 
-    margin-bottom: 18px;
-}
+                View all →
 
-.panel-header h3 {
-    font-size: 17px;
-}
+            \</button>
 
-.panel-header small {
-    color: var(--muted);
+        \</div>
 
-    font-size: 10px;
-}
 
 
-/* =========================================================
-   QUICK COMMANDS
-========================================================= */
+        \<div id="todaySchedule"
+             class="events-list">
 
-.quick-commands {
-    display: grid;
+            \<div class="empty-large">
 
-    grid-template-columns:
-        repeat(2, 1fr);
+                \<div>📅\</div>
 
-    gap: 10px;
-}
+                \<h4>
+                    No events today
+                \</h4>
 
-.command-card {
-    padding: 14px;
+                \<p>
+                    Ask AURA to schedule something.
+                \</p>
 
-    border-radius: 14px;
+            \</div>
 
-    border:
-        1px solid var(--border);
+        \</div>
 
-    background:
-        rgba(255,255,255,0.035);
+    \</div>
 
-    color: white;
 
-    text-align: left;
 
-    transition: 0.25s;
-}
 
-.command-card:hover {
-    transform: translateY(-2px);
 
-    background:
-        rgba(124,92,255,0.12);
-}
+    \<!-- AURA CARD -->
 
-.command-card strong {
-    display: block;
+    \<div class="panel">
 
-    font-size: 12px;
+        \<div class="panel-header">
 
-    margin-bottom: 4px;
-}
+            \<div>
 
-.command-card small {
-    color: var(--muted);
+                \<small>
+                    AI ASSISTANT
+                \</small>
 
-    font-size: 10px;
-}
+                \<h3>
+                    AURA says...
+                \</h3>
 
+            \</div>
 
-/* =========================================================
-   SECTION
-========================================================= */
+            \<span class="ai-status">
+                ● Online
+            \</span>
 
-.section {
-    margin-top: 35px;
-}
+        \</div>
 
-.section-heading {
-    display: flex;
 
-    justify-content: space-between;
 
-    align-items: flex-end;
+        \<div class="aura-message">
 
-    gap: 20px;
+            \<div class="message-avatar">
+                ✦
+            \</div>
 
-    margin-bottom: 18px;
-}
+            \<div class="message-bubble">
 
-.section-heading h2 {
-    font-size: 28px;
-}
+                \<p id="auraGreeting">
 
-.section-heading p {
-    color: var(--muted);
+                    Hi! I'm AURA 💜
 
-    font-size: 12px;
+                    \<br>\<br>
 
-    margin-top: 5px;
-}
+                    I'm your personal AI calendar assistant.
 
+                    \<br>\<br>
 
-/* =========================================================
-   CALENDAR
-========================================================= */
+                    You can type or speak commands like:
 
-.calendar-panel {
-    background: var(--card);
+                    \<br>\<br>
 
-    border:
-        1px solid var(--border);
+                    \<b>
+                        "Schedule meeting tomorrow at 5 PM"
+                    \</b>
 
-    border-radius: 22px;
+                \</p>
 
-    padding: 18px;
-}
+            \</div>
 
-.calendar-toolbar {
-    display: flex;
+        \</div>
 
-    justify-content: space-between;
 
-    align-items: center;
 
-    margin-bottom: 18px;
-}
+        \<div class="quick-commands">
 
-.calendar-toolbar h3 {
-    font-size: 18px;
-}
+            \<button class="quick-command"
+                    data-command="What do I have today?">
 
-.calendar-arrow {
-    width: 38px;
-    height: 38px;
+                📅 Today's schedule
 
-    border: 1px solid var(--border);
+            \</button>
 
-    border-radius: 11px;
 
-    background:
-        rgba(255,255,255,0.05);
 
-    color: white;
+            \<button class="quick-command"
+                    data-command="Find my free time">
 
-    font-size: 20px;
-}
+                🕐 Find free time
 
-.calendar-weekdays,
-.calendar-days {
-    display: grid;
+            \</button>
 
-    grid-template-columns:
-        repeat(7, 1fr);
 
-    gap: 6px;
-}
 
-.calendar-weekdays span {
-    text-align: center;
+            \<button class="quick-command"
+                    data-command="What festivals are coming?">
 
-    color: var(--muted);
+                🎉 Upcoming festivals
 
-    font-size: 10px;
+            \</button>
 
-    padding: 8px 2px;
-}
 
-.calendar-day {
-    min-height: 85px;
 
-    padding: 8px;
+            \<button class="quick-command"
+                    data-command="Suggest a good time for studying">
 
-    border-radius: 12px;
+                🧠 Smart suggestion
 
-    background:
-        rgba(255,255,255,0.025);
+            \</button>
 
-    border:
-        1px solid rgba(255,255,255,0.05);
+        \</div>
 
-    transition: 0.2s;
-}
+    \</div>
 
-.calendar-day:hover {
-    border-color:
-        rgba(124,92,255,0.4);
-}
+\</div>
 
-.calendar-day-number {
-    font-size: 12px;
+\</section>
 
-    font-weight: 700;
-}
 
-.calendar-day.today {
-    background:
-        rgba(124,92,255,0.15);
 
-    border-color:
-        rgba(124,92,255,0.5);
-}
 
-.calendar-event-dot {
-    margin-top: 8px;
 
-    padding: 3px 5px;
+\<!-- =====================================================
+     CALENDAR
+\===================================================== -->
 
-    border-radius: 6px;
+\<section class="section"
+         id="calendar">
 
-    background:
-        rgba(0,212,255,0.12);
+    \<div class="section-heading">
 
-    color:
-        #79eaff;
+        \<div>
 
-    font-size: 8px;
+            \<small>
+                PLAN YOUR MONTH
+            \</small>
 
-    white-space: nowrap;
+            \<h2>
+                Smart Calendar
+            \</h2>
 
-    overflow: hidden;
+            \<p>
+                Manage your events and important dates.
+            \</p>
 
-    text-overflow: ellipsis;
-}
+        \</div>
 
 
-/* =========================================================
-   FESTIVALS
-========================================================= */
 
-.festival-filters {
-    display: flex;
+        \<button class="primary-btn"
+                id="calendarAddBtn">
 
-    gap: 8px;
+            ＋ Add Event
 
-    flex-wrap: wrap;
+        \</button>
 
-    margin-bottom: 18px;
-}
+    \</div>
 
-.filter-btn {
-    border: 1px solid var(--border);
 
-    background:
-        rgba(255,255,255,0.04);
 
-    color: var(--muted);
+    \<div class="calendar-panel">
 
-    padding: 8px 13px;
 
-    border-radius: 20px;
 
-    font-size: 10px;
-}
+        \<div class="calendar-toolbar">
 
-.filter-btn.active {
-    background:
-        rgba(124,92,255,0.18);
+            \<button id="prevMonth"
+                    class="calendar-arrow">
 
-    color: white;
+                ‹
 
-    border-color:
-        rgba(124,92,255,0.4);
-}
+            \</button>
 
-.festival-grid {
-    display: grid;
 
-    grid-template-columns:
-        repeat(3, 1fr);
 
-    gap: 14px;
-}
+            \<h3 id="calendarMonth">
+                September 2026
+            \</h3>
 
-.festival-card {
-    padding: 17px;
 
-    border-radius: 17px;
 
-    background: var(--card);
+            \<button id="nextMonth"
+                    class="calendar-arrow">
 
-    border:
-        1px solid var(--border);
+                ›
 
-    transition: 0.25s;
-}
+            \</button>
 
-.festival-card:hover {
-    transform: translateY(-3px);
+        \</div>
 
-    border-color:
-        rgba(124,92,255,0.35);
-}
 
-.festival-card .date {
-    color:
-        #9b8aff;
 
-    font-size: 10px;
+        \<div class="calendar-weekdays">
 
-    margin-bottom: 8px;
-}
+            \<span>Sun\</span>
+            \<span>Mon\</span>
+            \<span>Tue\</span>
+            \<span>Wed\</span>
+            \<span>Thu\</span>
+            \<span>Fri\</span>
+            \<span>Sat\</span>
 
-.festival-card h3 {
-    font-size: 15px;
+        \</div>
 
-    margin-bottom: 5px;
-}
 
-.festival-card p {
-    color: var(--muted);
 
-    font-size: 10px;
+        \<div id="calendarDays"
+             class="calendar-days">
 
-    line-height: 1.5;
-}
+        \</div>
 
+    \</div>
 
-/* =========================================================
-   ASSISTANT
-========================================================= */
+\</section>
 
-.assistant-layout {
-    display: grid;
 
-    grid-template-columns:
-        0.8fr 1.2fr;
 
-    gap: 18px;
 
-    min-height: 550px;
-}
 
-.assistant-visual {
-    border-radius: 22px;
+\<!-- =====================================================
+     MY SCHEDULE
+\===================================================== -->
 
-    background:
-        linear-gradient(
-            145deg,
-            rgba(124,92,255,0.15),
-            rgba(0,212,255,0.05)
-        );
+\<section class="section"
+         id="schedule">
 
-    border:
-        1px solid var(--border);
+    \<div class="section-heading">
 
-    display: flex;
+        \<div>
 
-    flex-direction: column;
+            \<small>
+                YOUR PLANS
+            \</small>
 
-    align-items: center;
+            \<h2>
+                My Schedule
+            \</h2>
 
-    justify-content: center;
+            \<p>
+                All your events in one place.
+            \</p>
 
-    text-align: center;
+        \</div>
 
-    padding: 25px;
-}
 
-.big-aura {
-    width: 260px;
-    height: 260px;
 
-    border-radius: 50%;
+        \<button class="primary-btn"
+                id="scheduleAddBtn">
 
-    background:
-        radial-gradient(
-            circle,
-            white 0%,
-            var(--secondary) 8%,
-            var(--primary) 35%,
-            transparent 70%
-        );
+            ＋ New Schedule
 
-    box-shadow:
-        0 0 80px
-        rgba(124,92,255,0.45);
+        \</button>
 
-    animation:
-        auraFloat 3.5s ease-in-out infinite;
-}
+    \</div>
 
-.assistant-visual h2 {
-    margin-top: 20px;
 
-    font-size: 25px;
-}
 
-.assistant-visual p {
-    color: var(--muted);
+    \<div id="eventsContainer"
+         class="all-events">
 
-    font-size: 11px;
+        \<div class="empty-large">
 
-    margin-top: 6px;
-}
+            \<div>
+                🗓️
+            \</div>
 
+            \<h4>
+                No schedules yet
+            \</h4>
 
-/* =========================================================
-   CHAT
-========================================================= */
+            \<p>
+                Create your first event.
+            \</p>
 
-.chat-panel {
-    display: flex;
+        \</div>
 
-    flex-direction: column;
+    \</div>
 
-    overflow: hidden;
+\</section>
 
-    border-radius: 22px;
 
-    background: var(--card);
 
-    border:
-        1px solid var(--border);
-}
 
-.chat-header {
-    padding: 16px 18px;
 
-    border-bottom:
-        1px solid var(--border);
+\<!-- =====================================================
+     FESTIVALS
+\===================================================== -->
 
-    display: flex;
+\<section class="section"
+         id="festivals">
 
-    align-items: center;
+    \<div class="section-heading">
 
-    gap: 10px;
-}
+        \<div>
 
-.chat-header .status {
-    width: 9px;
-    height: 9px;
+            \<small>
+                INDIA • 2026
+            \</small>
 
-    border-radius: 50%;
+            \<h2>
+                Festivals & Important Days
+            \</h2>
 
-    background: var(--green);
+            \<p>
+                Never miss an important day.
+            \</p>
 
-    box-shadow:
-        0 0 10px var(--green);
-}
+        \</div>
 
-.chat-header strong {
-    font-size: 13px;
-}
+    \</div>
 
-.chat-header small {
-    color: var(--muted);
 
-    display: block;
 
-    font-size: 9px;
-}
+    \<div class="festival-filters">
 
-.chat-box {
-    flex: 1;
+        \<button class="filter-btn active"
+                data-filter="All">
 
-    padding: 18px;
+            All
 
-    overflow-y: auto;
+        \</button>
 
-    min-height: 380px;
-}
 
-.chat-message {
-    max-width: 78%;
 
-    padding: 11px 13px;
+        \<button class="filter-btn"
+                data-filter="Festival">
 
-    border-radius: 14px;
+            Festivals
 
-    margin-bottom: 10px;
+        \</button>
 
-    font-size: 12px;
 
-    line-height: 1.5;
-}
 
-.chat-message.bot {
-    background:
-        rgba(124,92,255,0.12);
+        \<button class="filter-btn"
+                data-filter="National">
 
-    border:
-        1px solid rgba(124,92,255,0.18);
-}
+            National
 
-.chat-message.user {
-    margin-left: auto;
+        \</button>
 
-    background:
-        linear-gradient(
-            135deg,
-            var(--primary),
-            #566cff
-        );
-}
 
-.chat-input-area {
-    display: flex;
 
-    gap: 8px;
+        \<button class="filter-btn"
+                data-filter="Maharashtra">
 
-    padding: 12px;
+            Maharashtra
 
-    border-top:
-        1px solid var(--border);
-}
+        \</button>
 
-.chat-input-area input {
-    flex: 1;
+    \</div>
 
-    min-width: 0;
 
-    border: 1px solid var(--border);
 
-    border-radius: 13px;
+    \<div id="festivalGrid"
+         class="festival-grid">
 
-    background:
-        rgba(255,255,255,0.04);
+    \</div>
 
-    color: white;
+\</section>
 
-    padding: 12px;
 
-    outline: none;
-}
 
-.chat-input-area input:focus {
-    border-color:
-        rgba(124,92,255,0.6);
-}
 
-.chat-mic,
-.send-btn {
-    width: 42px;
-    height: 42px;
 
-    flex-shrink: 0;
+\<!-- =====================================================
+     AURA AI ASSISTANT
+\===================================================== -->
 
-    border: none;
+\<section class="section"
+         id="assistant">
 
-    border-radius: 12px;
 
-    color: white;
 
-    background:
-        rgba(255,255,255,0.07);
-}
+    \<div class="assistant-layout">
 
-.send-btn {
-    background:
-        linear-gradient(
-            135deg,
-            var(--primary),
-            var(--secondary)
-        );
-}
 
-.language-row {
-    display: flex;
 
-    gap: 7px;
+        \<!-- LEFT -->
 
-    padding: 0 12px 12px;
-}
+        \<div class="assistant-visual">
 
-.language-btn {
-    padding: 7px 11px;
+            \<div class="assistant-status">
+                ● AURA IS READY
+            \</div>
 
-    border: 1px solid var(--border);
 
-    border-radius: 10px;
 
-    background:
-        rgba(255,255,255,0.04);
+            \<div class="big-aura">
 
-    color: var(--muted);
+                \<div class="big-ring ring-a">\</div>
+                \<div class="big-ring ring-b">\</div>
+                \<div class="big-ring ring-c">\</div>
 
-    font-size: 9px;
-}
 
-.language-btn.active {
-    color: white;
 
-    background:
-        rgba(124,92,255,0.2);
-}
+                \<div class="big-orb"
+                     id="bigAuraOrb">
 
+                    ✦
 
-/* =========================================================
-   MODAL
-========================================================= */
+                \</div>
 
-.modal {
-    position: fixed;
+            \</div>
 
-    inset: 0;
 
-    z-index: 2000;
 
-    display: none;
+            \<h2>
+                Hi, I'm AURA 💜
+            \</h2>
 
-    align-items: center;
 
-    justify-content: center;
 
-    padding: 20px;
+            \<p>
+                Your personal AI calendar assistant.
+            \</p>
 
-    background:
-        rgba(0,0,0,0.72);
 
-    backdrop-filter: blur(8px);
-}
 
-.modal.show {
-    display: flex;
-}
+            \<button class="voice-btn"
+                    id="voiceBtn">
 
-.modal-box {
-    width: 100%;
+                🎙️
+                \<span>Tap & Speak\</span>
 
-    max-width: 560px;
+            \</button>
 
-    max-height: 90vh;
 
-    overflow-y: auto;
 
-    padding: 25px;
+            \<small>
+                Speak naturally in English,
+                Hindi or Marathi.
+            \</small>
 
-    border-radius: 22px;
+        \</div>
 
-    background:
-        #11172a;
 
-    border:
-        1px solid var(--border);
 
-    box-shadow:
-        0 30px 100px
-        rgba(0,0,0,0.5);
-}
 
-.modal-header {
-    display: flex;
 
-    justify-content: space-between;
+        \<!-- RIGHT CHAT -->
 
-    align-items: center;
+        \<div class="chat-panel">
 
-    margin-bottom: 20px;
-}
 
-.modal-header h2 {
-    font-size: 20px;
-}
 
-.modal-close {
-    width: 35px;
-    height: 35px;
+            \<div class="chat-header">
 
-    border: 1px solid var(--border);
+                \<div class="chat-profile">
 
-    border-radius: 10px;
+                    \<div class="chat-avatar">
+                        ✦
+                    \</div>
 
-    background:
-        rgba(255,255,255,0.05);
+                    \<div>
 
-    color: white;
-}
+                        \<strong>
+                            AURA
+                        \</strong>
 
-.form-row {
-    display: grid;
+                        \<span>
+                            Female AI Assistant • Online
+                        \</span>
 
-    grid-template-columns:
-        repeat(2, 1fr);
+                    \</div>
 
-    gap: 12px;
+                \</div>
 
-    margin-bottom: 12px;
-}
 
-.form-group {
-    margin-bottom: 12px;
-}
 
-.form-group label {
-    display: block;
+                \<button id="clearChat"
+                        class="chat-action">
 
-    font-size: 10px;
+                    Clear
 
-    color: var(--muted);
+                \</button>
 
-    margin-bottom: 6px;
-}
+            \</div>
 
-.form-group input,
-.form-group select,
-.form-group textarea {
-    width: 100%;
 
-    padding: 11px;
 
-    border: 1px solid var(--border);
 
-    border-radius: 11px;
 
-    background:
-        rgba(255,255,255,0.04);
+            \<!-- CHAT -->
 
-    color: white;
+            \<div id="chatBox"
+                 class="chat-box">
 
-    outline: none;
-}
 
-.form-group textarea {
-    min-height: 90px;
 
-    resize: vertical;
-}
+                \<div class="chat-message aura">
 
-.modal-actions {
-    display: flex;
+                    \<div class="chat-small-avatar">
+                        ✦
+                    \</div>
 
-    justify-content: flex-end;
+                    \<div class="chat-text">
 
-    gap: 8px;
+                        Hello! I'm AURA 👋💜
 
-    margin-top: 18px;
-}
+                        \<br>\<br>
 
+                        Tell me what you want to do.
 
-/* =========================================================
-   NOTIFICATION
-========================================================= */
+                        \<br>\<br>
 
-.notification-panel {
-    position: fixed;
+                        Try:
 
-    top: 75px;
+                        \<br>
+                        • Schedule an event
+                        \<br>
+                        • Check today's schedule
+                        \<br>
+                        • Find free time
+                        \<br>
+                        • Check festivals
+                        \<br>
+                        • Ask for suggestions
 
-    right: 25px;
+                    \</div>
 
-    width: 320px;
+                \</div>
 
-    z-index: 1500;
+            \</div>
 
-    display: none;
 
-    padding: 15px;
 
-    border-radius: 18px;
 
-    background:
-        #131a2e;
 
-    border:
-        1px solid var(--border);
+            \<!-- INPUT -->
 
-    box-shadow:
-        0 20px 60px
-        rgba(0,0,0,0.4);
-}
+            \<div class="chat-input-area">
 
-.notification-panel.show {
-    display: block;
-}
+                \<button id="chatMic"
+                        class="chat-mic"
+                        title="Voice input">
 
+                    🎙️
 
-/* =========================================================
-   TOAST
-========================================================= */
+                \</button>
 
-.toast {
-    position: fixed;
 
-    bottom: 25px;
 
-    left: 50%;
+                \<input
+                    type="text"
+                    id="commandInput"
+                    placeholder="Ask AURA anything..."
+                    autocomplete="off"
+                \>
 
-    transform: translateX(-50%);
 
-    z-index: 3000;
 
-    min-width: 260px;
+                \<button id="sendCommand"
+                        class="send-btn">
 
-    max-width: 90%;
+                    ➤
 
-    padding: 13px 17px;
+                \</button>
 
-    border-radius: 13px;
+            \</div>
 
-    background:
-        #161e35;
 
-    border:
-        1px solid var(--border);
 
-    box-shadow:
-        0 15px 40px
-        rgba(0,0,0,0.35);
 
-    font-size: 12px;
 
-    text-align: center;
-}
+            \<!-- LANGUAGES -->
 
+            \<div class="language-row">
 
-/* =========================================================
-   SCROLLBAR
-========================================================= */
+                \<span>
+                    Language:
+                \</span>
 
-::-webkit-scrollbar {
-    width: 7px;
-    height: 7px;
-}
 
-::-webkit-scrollbar-track {
-    background: transparent;
-}
 
-::-webkit-scrollbar-thumb {
-    background:
-        rgba(124,92,255,0.4);
+                \<button class="language-btn active"
+                        data-language="en-IN">
 
-    border-radius: 10px;
-}
+                    English
 
+                \</button>
 
-/* =========================================================
-   TABLET
-========================================================= */
 
-@media (max-width: 1100px) {
 
-    .sidebar {
-        width: 220px;
-    }
+                \<button class="language-btn"
+                        data-language="hi-IN">
 
-    .main {
-        margin-left: 220px;
+                    हिंदी
 
-        width: calc(100% - 220px);
+                \</button>
 
-        padding: 25px;
-    }
 
-    .stats-grid {
-        grid-template-columns:
-            repeat(2, 1fr);
-    }
 
-    .dashboard-grid {
-        grid-template-columns: 1fr;
-    }
+                \<button class="language-btn"
+                        data-language="mr-IN">
 
-    .festival-grid {
-        grid-template-columns:
-            repeat(2, 1fr);
-    }
+                    मराठी
 
-    .assistant-layout {
-        grid-template-columns: 1fr;
-    }
-}
+                \</button>
 
+            \</div>
 
-/* =========================================================
-   MOBILE NAVIGATION
-========================================================= */
+        \</div>
 
-@media (max-width: 800px) {
+    \</div>
 
-    .app {
-        display: block;
-    }
+\</section>
 
-    /* TOP MOBILE NAV */
+\</main>
 
-    .sidebar {
-        position: sticky;
+\</div>
 
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: auto;
 
-        width: 100%;
 
-        min-height: auto;
 
-        height: auto;
 
-        padding: 10px 12px;
+\<!-- =====================================================
+     EVENT MODAL
+\===================================================== -->
 
-        flex-direction: row;
+\<div class="modal"
+     id="eventModal">
 
-        align-items: center;
 
-        gap: 10px;
 
-        border-right: none;
+    \<div class="modal-overlay">\</div>
 
-        border-bottom:
-            1px solid var(--border);
 
-        background:
-            rgba(9,13,26,0.96);
 
-        backdrop-filter: blur(20px);
-    }
+    \<div class="modal-box">
 
-    .brand {
-        padding: 0;
 
-        gap: 8px;
 
-        flex-shrink: 0;
-    }
+        \<button class="modal-close"
+                id="closeModal">
 
-    .brand-orb {
-        width: 40px;
-        height: 40px;
+            ×
 
-        border-radius: 12px;
+        \</button>
 
-        font-size: 20px;
-    }
 
-    .brand h1 {
-        font-size: 17px;
-    }
 
-    .brand p {
-        font-size: 8px;
-    }
+        \<div class="modal-header">
 
-    .navigation {
-        flex: 1;
+            \<div class="modal-icon">
+                ✦
+            \</div>
 
-        min-width: 0;
+            \<div>
 
-        flex-direction: row;
+                \<small>
+                    AURA CALENDAR
+                \</small>
 
-        gap: 6px;
+                \<h2>
+                    Create New Event
+                \</h2>
 
-        overflow-x: auto;
+                \<p>
+                    Add a new event to your calendar.
+                \</p>
 
-        scrollbar-width: none;
-    }
+            \</div>
 
-    .navigation::-webkit-scrollbar {
-        display: none;
-    }
+        \</div>
 
-    .nav-item {
-        width: auto;
 
-        min-width: max-content;
 
-        padding: 9px 10px;
 
-        border-radius: 11px;
 
-        gap: 6px;
+        \<form id="eventForm">
 
-        font-size: 10px;
 
-        white-space: nowrap;
-    }
 
-    .nav-item span {
-        width: auto;
+            \<!-- TITLE -->
 
-        font-size: 14px;
-    }
+            \<div class="form-group">
 
-    .sidebar-assistant {
-        display: none;
-    }
+                \<label>
+                    Event Title
+                \</label>
 
-    .main {
-        margin-left: 0;
+                \<input
+                    type="text"
+                    id="eventTitle"
+                    placeholder="e.g. College presentation"
+                    required
+                \>
 
-        width: 100%;
+            \</div>
 
-        padding: 18px 15px 45px;
-    }
 
-    .topbar {
-        gap: 10px;
 
-        align-items: flex-start;
-    }
 
-    .topbar h2 {
-        font-size: 21px;
-    }
 
-    .live-clock {
-        display: none;
-    }
-}
+            \<!-- DATE + TIME -->
 
+            \<div class="form-row">
 
-/* =========================================================
-   SMALL MOBILE
-========================================================= */
 
-@media (max-width: 600px) {
 
-    .main {
-        padding: 14px 12px 40px;
-    }
+                \<div class="form-group">
 
-    .topbar {
-        margin-bottom: 16px;
-    }
+                    \<label>
+                        Date
+                    \</label>
 
-    .welcome-text {
-        font-size: 10px;
-    }
+                    \<input
+                        type="date"
+                        id="eventDate"
+                        required
+                    \>
 
-    .topbar h2 {
-        font-size: 17px;
+                \</div>
 
-        line-height: 1.3;
-    }
 
-    .top-actions {
-        gap: 6px;
-    }
 
-    .icon-button,
-    .avatar-button {
-        width: 37px;
-        height: 37px;
+                \<div class="form-group">
 
-        border-radius: 11px;
-    }
+                    \<label>
+                        Time
+                    \</label>
 
+                    \<input
+                        type="time"
+                        id="eventTime"
+                        required
+                    \>
 
-    /* HERO */
+                \</div>
 
-    .hero-card {
-        padding: 22px 16px;
+            \</div>
 
-        border-radius: 21px;
 
-        min-height: auto;
 
-        flex-direction: column;
 
-        align-items: flex-start;
 
-        gap: 5px;
-    }
+            \<!-- REMINDER + PRIORITY -->
 
-    .hero-content {
-        width: 100%;
-    }
+            \<div class="form-row">
 
-    .hero-content h1 {
-        font-size: 31px;
 
-        line-height: 1.08;
-    }
 
-    .hero-content p {
-        font-size: 11px;
+                \<div class="form-group">
 
-        line-height: 1.6;
-    }
+                    \<label>
+                        Reminder
+                    \</label>
 
-    .hero-actions {
-        width: 100%;
+                    \<select id="reminderTime">
 
-        flex-direction: column;
+                        \<option value="0">
+                            At event time
+                        \</option>
 
-        gap: 8px;
+                        \<option value="5">
+                            5 minutes before
+                        \</option>
 
-        margin-top: 18px;
-    }
+                        \<option value="10">
+                            10 minutes before
+                        \</option>
 
-    .hero-actions button {
-        width: 100%;
-    }
+                        \<option value="15">
+                            15 minutes before
+                        \</option>
 
-    .hero-aura {
-        width: 190px;
-        height: 190px;
+                        \<option value="30" selected>
+                            30 minutes before
+                        \</option>
 
-        align-self: center;
+                        \<option value="60">
+                            1 hour before
+                        \</option>
 
-        margin:
-            5px auto -30px;
+                        \<option value="120">
+                            2 hours before
+                        \</option>
 
-        transform: scale(0.8);
-    }
+                    \</select>
 
+                \</div>
 
-    /* STATS */
 
-    .stats-grid {
-        grid-template-columns:
-            repeat(2, 1fr);
 
-        gap: 8px;
+                \<div class="form-group">
 
-        margin: 14px 0;
-    }
+                    \<label>
+                        Priority
+                    \</label>
 
-    .stat-card {
-        padding: 11px 9px;
+                    \<select id="eventPriority">
 
-        border-radius: 14px;
+                        \<option>
+                            Low
+                        \</option>
 
-        gap: 8px;
-    }
+                        \<option selected>
+                            Medium
+                        \</option>
 
-    .stat-icon {
-        width: 34px;
-        height: 34px;
+                        \<option>
+                            High
+                        \</option>
 
-        border-radius: 9px;
+                        \<option>
+                            Urgent
+                        \</option>
 
-        font-size: 15px;
-    }
+                    \</select>
 
-    .stat-card span {
-        font-size: 8px;
-    }
+                \</div>
 
-    .stat-card strong {
-        font-size: 19px;
-    }
+            \</div>
 
 
-    /* PANELS */
 
-    .dashboard-grid {
-        gap: 12px;
-    }
 
-    .panel {
-        padding: 14px;
 
-        border-radius: 17px;
-    }
+            \<!-- CATEGORY -->
 
-    .panel-header h3 {
-        font-size: 14px;
-    }
+            \<div class="form-group">
 
+                \<label>
+                    Category
+                \</label>
 
-    /* QUICK COMMANDS */
+                \<select id="eventCategory">
 
-    .quick-commands {
-        grid-template-columns: 1fr;
-    }
+                    \<option>
+                        Personal
+                    \</option>
 
+                    \<option>
+                        Study
+                    \</option>
 
-    /* SECTION */
+                    \<option>
+                        College
+                    \</option>
 
-    .section {
-        margin-top: 25px;
-    }
+                    \<option>
+                        Work
+                    \</option>
 
-    .section-heading {
-        flex-direction: column;
+                    \<option>
+                        Meeting
+                    \</option>
 
-        align-items: flex-start;
+                    \<option>
+                        Birthday
+                    \</option>
 
-        gap: 10px;
-    }
+                    \<option>
+                        Festival
+                    \</option>
 
-    .section-heading h2 {
-        font-size: 23px;
-    }
+                    \<option>
+                        Holiday
+                    \</option>
 
-    .section-heading p {
-        font-size: 10px;
+                    \<option>
+                        Other
+                    \</option>
 
-        line-height: 1.5;
-    }
+                \</select>
 
-    .section-heading .primary-btn {
-        width: 100%;
-    }
+            \</div>
 
 
-    /* CALENDAR */
 
-    .calendar-panel {
-        padding: 8px;
 
-        border-radius: 17px;
-    }
 
-    .calendar-toolbar {
-        gap: 8px;
+            \<!-- DESCRIPTION -->
 
-        margin-bottom: 10px;
-    }
+            \<div class="form-group">
 
-    .calendar-toolbar h3 {
-        min-width: 0;
+                \<label>
+                    Description
+                \</label>
 
-        font-size: 14px;
-    }
+                \<textarea
+                    id="eventDescription"
+                    rows="4"
+                    placeholder="Add notes about this event..."
+                \>\</textarea>
 
-    .calendar-arrow {
-        width: 33px;
-        height: 33px;
+            \</div>
 
-        font-size: 18px;
-    }
 
-    .calendar-weekdays,
-    .calendar-days {
-        gap: 4px;
-    }
 
-    .calendar-weekdays span {
-        font-size: 8px;
 
-        padding: 6px 2px;
-    }
 
-    .calendar-day {
-        min-height: 52px;
+            \<div class="voice-tip">
 
-        padding: 5px;
+                💡
+                You can also say:
 
-        border-radius: 8px;
-    }
+                \<b>
+                    "Schedule this tomorrow at 5 PM"
+                \</b>
 
-    .calendar-day-number {
-        font-size: 10px;
-    }
+            \</div>
 
-    .calendar-event-dot {
-        font-size: 7px;
 
-        padding: 2px 3px;
 
-        margin-top: 4px;
 
-        white-space: nowrap;
 
-        overflow: hidden;
+            \<!-- BUTTONS -->
 
-        text-overflow: ellipsis;
-    }
+            \<div class="modal-actions">
 
+                \<button
+                    type="button"
+                    class="secondary-btn"
+                    id="cancelEvent">
 
-    /* FESTIVAL */
+                    Cancel
 
-    .festival-filters {
-        overflow-x: auto;
+                \</button>
 
-        flex-wrap: nowrap;
 
-        padding-bottom: 4px;
 
-        scrollbar-width: none;
-    }
+                \<button
+                    type="submit"
+                    class="primary-btn">
 
-    .festival-filters::-webkit-scrollbar {
-        display: none;
-    }
+                    ✦ Create Event
 
-    .filter-btn {
-        white-space: nowrap;
+                \</button>
 
-        flex-shrink: 0;
-    }
+            \</div>
 
-    .festival-grid {
-        grid-template-columns: 1fr;
-    }
+        \</form>
 
+    \</div>
 
-    /* ASSISTANT */
+\</div>
 
-    .assistant-layout {
-        grid-template-columns: 1fr;
 
-        gap: 12px;
 
-        min-height: 0;
-    }
 
-    .assistant-visual {
-        padding: 20px 14px;
 
-        border-radius: 18px;
+\<!-- =====================================================
+     NOTIFICATION PANEL
+\===================================================== -->
 
-        min-height: 390px;
-    }
+\<div class="notification-panel"
+     id="notificationPanel">
 
-    .big-aura {
-        width: 210px;
-        height: 210px;
 
-        transform: scale(0.78);
-    }
 
-    .assistant-visual h2 {
-        font-size: 20px;
-    }
+    \<div class="notification-header">
 
+        \<h3>
+            Notifications
+        \</h3>
 
-    /* CHAT */
 
-    .chat-panel {
-        min-height: 510px;
 
-        border-radius: 18px;
-    }
+        \<button id="closeNotifications">
+            ×
+        \</button>
 
-    .chat-header {
-        padding: 12px;
-    }
+    \</div>
 
-    .chat-box {
-        padding: 13px;
 
-        min-height: 330px;
-    }
 
-    .chat-message {
-        max-width: 92%;
+    \<div class="notification-list"
+         id="notificationList">
 
-        font-size: 11px;
-    }
+        \<div class="empty-notification">
 
-    .chat-input-area {
-        padding: 9px;
+            🔔
 
-        gap: 5px;
-    }
+            \<p>
+                No new notifications
+            \</p>
 
-    .chat-input-area input {
-        min-width: 0;
+        \</div>
 
-        padding: 10px;
+    \</div>
 
-        font-size: 11px;
-    }
+\</div>
 
-    .chat-mic,
-    .send-btn {
-        width: 37px;
-        height: 37px;
-    }
 
-    .language-row {
-        padding:
-            0 9px 9px;
 
-        gap: 5px;
 
-        overflow-x: auto;
-    }
 
-    .language-btn {
-        flex-shrink: 0;
+\<!-- =====================================================
+     TOAST MESSAGE
+\===================================================== -->
 
-        padding: 7px 9px;
-    }
+\<div class="toast"
+     id="toast">
 
+    \<span id="toastIcon">
+        ✓
+    \</span>
 
-    /* MODAL */
 
-    .modal {
-        padding: 10px;
-    }
 
-    .modal-box {
-        max-height: 94vh;
+    \<div>
 
-        padding: 18px 14px;
+        \<strong id="toastTitle">
+            Success
+        \</strong>
 
-        border-radius: 18px;
-    }
+        \<p id="toastMessage">
+            Done!
+        \</p>
 
-    .modal-header h2 {
-        font-size: 17px;
-    }
+    \</div>
 
-    .form-row {
-        grid-template-columns: 1fr;
-    }
+\</div>
 
-    .modal-actions {
-        flex-direction: column-reverse;
-    }
 
-    .modal-actions button {
-        width: 100%;
-    }
 
 
-    /* NOTIFICATION */
 
-    .notification-panel {
-        top: 65px;
+\<!-- =====================================================
+     JAVASCRIPT
+\===================================================== -->
 
-        left: 10px;
-        right: 10px;
+\<script src="{{ url\_for('static', filename='script.js') }}?v=10">\</script>
 
-        width: auto;
-    }
-
-    .toast {
-        left: 12px;
-        right: 12px;
-
-        transform: none;
-
-        width: auto;
-
-        min-width: 0;
-
-        bottom: 12px;
-    }
-}
-
-
-/* =========================================================
-   VERY SMALL PHONES
-========================================================= */
-
-@media (max-width: 380px) {
-
-    .brand p {
-        display: none;
-    }
-
-    .brand h1 {
-        font-size: 15px;
-    }
-
-    .brand-orb {
-        width: 37px;
-        height: 37px;
-    }
-
-    .nav-item {
-        padding: 8px;
-    }
-
-    .nav-item span {
-        font-size: 13px;
-    }
-
-    .nav-item {
-        font-size: 9px;
-    }
-
-    .hero-content h1 {
-        font-size: 27px;
-    }
-
-    .hero-aura {
-        width: 170px;
-        height: 170px;
-
-        transform: scale(0.7);
-    }
-
-    .stats-grid {
-        gap: 6px;
-    }
-
-    .stat-card {
-        padding: 9px 7px;
-    }
-
-    .stat-card strong {
-        font-size: 17px;
-    }
-
-    .calendar-day {
-        min-height: 47px;
-    }
-}
+\</body>
+\</html>
